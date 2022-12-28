@@ -4,79 +4,57 @@
       <div class="flex h-16 items-center justify-between">
         <div class="flex items-center">
           <div class="flex-shrink-0">
-            <img
-              class="h-8 w-8"
-              src="https://tailwindui.com/img/logos/workflow-mark-indigo-400.svg"
-              alt="Workflow logo" />
+            <NuxtLink to="/">
+              <img
+                class="h-8 w-8 rounded-full"
+                src="~/assets/img/logo-800x600.png"
+                alt="TS logo 800x600" />
+            </NuxtLink>
           </div>
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline">
-              <a
-                href="#"
-                class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white focus:bg-gray-700 focus:text-white focus:outline-none"
-                >Dashboard</a
-              >
-              <a
-                href="#"
-                class="ml-4 rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white focus:bg-gray-700 focus:text-white focus:outline-none"
-                >Team</a
-              >
-              <a
-                href="#"
-                class="ml-4 rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white focus:bg-gray-700 focus:text-white focus:outline-none"
-                >Projects</a
-              >
-              <a
-                href="#"
-                class="ml-4 rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white focus:bg-gray-700 focus:text-white focus:outline-none"
-                >Calendar</a
-              >
-              <a
-                href="#"
-                class="ml-4 rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white focus:bg-gray-700 focus:text-white focus:outline-none"
-                >Reports</a
-              >
+              <NuxtLink
+                v-for="p in products"
+                :key="p.title"
+                :to="p.link"
+                class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white focus:bg-gray-700 focus:text-white focus:outline-none">
+                {{ p.title }}
+              </NuxtLink>
             </div>
           </div>
         </div>
         <div class="hidden md:block">
           <div class="ml-4 flex items-center md:ml-6">
             <button
-              class="rounded-full border-2 border-transparent p-1 text-gray-400 hover:text-white focus:bg-gray-700 focus:text-white focus:outline-none"
-              aria-label="Notifications">
-              <svg
-                class="h-6 w-6"
-                stroke="currentColor"
-                fill="none"
-                viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
-              </svg>
+              class="rounded border-2 border-transparent p-1 text-3xl text-gray-400 hover:bg-gray-700 hover:text-white focus:text-white focus:outline-none"
+              aria-label="Search">
+              <Icon name="ic:sharp-search" />
             </button>
 
+            <NuxtLink to="/cart">
+              <button
+                class="rounded border-2 border-transparent p-1 text-3xl text-gray-400 hover:bg-gray-700 hover:text-white focus:text-white focus:outline-none"
+                aria-label="Shopping cart">
+                <Icon name="ic:baseline-shopping-cart" />
+              </button>
+            </NuxtLink>
             <!-- Profile dropdown -->
             <div class="relative ml-3">
               <div>
                 <button
                   @click="toggle"
-                  class="focus:shadow-solid flex max-w-xs items-center rounded-full text-sm text-white focus:outline-none"
+                  class="focus:shadow-solid flex max-w-xs items-center rounded p-1 text-3xl text-gray-400 hover:bg-gray-700 hover:text-white focus:text-white focus:outline-none"
                   id="user-menu"
                   aria-label="User menu"
                   aria-haspopup="true">
-                  <img
-                    class="h-8 w-8 rounded-full"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt="" />
+                  <Icon name="ic:baseline-person" />
                 </button>
               </div>
               <transition
                 enter-active-class="transition ease-out duration-100"
                 enter-class="transform opacity-0 scale-95"
                 enter-to-class="transform opacity-100 scale-100"
-                leave-active-class="transition ease-in duration-75"
+                leave-active-class="transition ease-in duration-200"
                 leave-class="transform opacity-100 scale-100"
                 leave-to-class="transform opacity-0 scale-95">
                 <div
@@ -88,23 +66,13 @@
                     aria-orientation="vertical"
                     aria-labelledby="user-menu">
                     <a
+                      v-for="u in userCenter"
+                      :key="u.title"
                       href="#"
                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      role="menuitem"
-                      >Your Profile</a
-                    >
-                    <a
-                      href="#"
-                      class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      role="menuitem"
-                      >Settings</a
-                    >
-                    <a
-                      href="#"
-                      class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      role="menuitem"
-                      >Sign out</a
-                    >
+                      role="menuitem">
+                      {{ u.title }}
+                    </a>
                   </div>
                 </div>
               </transition>
@@ -144,65 +112,23 @@
     </div>
     <div :class="[isOpen ? '' : 'hidden', 'md:hidden']">
       <div class="px-2 pt-2 pb-3 sm:px-3">
-        <a
-          href="#"
-          class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white focus:bg-gray-700 focus:text-white focus:outline-none"
-          >Dashboard</a
-        >
-        <a
-          href="#"
-          class="mt-1 block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white focus:bg-gray-700 focus:text-white focus:outline-none"
-          >Team</a
-        >
-        <a
-          href="#"
-          class="mt-1 block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white focus:bg-gray-700 focus:text-white focus:outline-none"
-          >Projects</a
-        >
-        <a
-          href="#"
-          class="mt-1 block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white focus:bg-gray-700 focus:text-white focus:outline-none"
-          >Calendar</a
-        >
-        <a
-          href="#"
-          class="mt-1 block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white focus:bg-gray-700 focus:text-white focus:outline-none"
-          >Reports</a
-        >
+        <NuxtLink
+          v-for="p in products"
+          :key="p.title"
+          :to="p.link"
+          class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white hover:bg-gray-700 focus:bg-gray-700 focus:text-white focus:outline-none">
+          {{ p.title }}
+        </NuxtLink>
       </div>
       <div class="border-t border-gray-700 pt-4 pb-3">
-        <div class="flex items-center px-5">
-          <div class="flex-shrink-0">
-            <img
-              class="h-10 w-10 rounded-full"
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-              alt="" />
-          </div>
-          <div class="ml-3">
-            <div class="text-base font-medium leading-none text-white">
-              Tom Cook
-            </div>
-            <div class="mt-1 text-sm font-medium leading-none text-gray-400">
-              tom@example.com
-            </div>
-          </div>
-        </div>
-        <div class="mt-3 px-2">
-          <a
+        <div class="px-2">
+          <NuxtLink
+            v-for="u in userCenter"
+            :key="u.title"
             href="#"
-            class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white focus:bg-gray-700 focus:text-white focus:outline-none"
-            >Your Profile</a
-          >
-          <a
-            href="#"
-            class="mt-1 block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white focus:bg-gray-700 focus:text-white focus:outline-none"
-            >Settings</a
-          >
-          <a
-            href="#"
-            class="mt-1 block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white focus:bg-gray-700 focus:text-white focus:outline-none"
-            >Sign out</a
-          >
+            class="mt-1 block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white focus:bg-gray-700 focus:text-white focus:outline-none">
+            {{ u.title }}
+          </NuxtLink>
         </div>
       </div>
     </div>
@@ -213,12 +139,57 @@
 export default defineComponent({
   name: 'NavBar',
   setup() {
+    const products = [
+      {
+        title: 'Tops',
+        link: '/products/',
+      },
+      {
+        title: 'Buttoms',
+        link: '/',
+      },
+      {
+        title: 'Socks',
+        link: '/',
+      },
+      {
+        title: 'Others',
+        link: '/',
+      },
+    ]
+
+    const userCenter = [
+      {
+        title: 'Sign in',
+        link: '/',
+      },
+      {
+        title: 'Sign up',
+        link: '/',
+      },
+      {
+        title: 'Your Profile',
+        link: '/',
+      },
+      {
+        title: 'Settings',
+        link: '/',
+      },
+      {
+        title: 'Help',
+        link: '/',
+      },
+    ]
+
     const isOpen = ref(false)
 
     function toggle() {
       isOpen.value = !isOpen.value
     }
     return {
+      products,
+      userCenter,
+
       isOpen,
       toggle,
     }
