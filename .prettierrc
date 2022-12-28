@@ -2,6 +2,5 @@
   "singleQuote": true,
   "semi": false,
   "endOfLine": "auto",
-  "tailwindConfig": ".nuxt/tailwind.config.cjs",
   "bracketSameLine": true
 }

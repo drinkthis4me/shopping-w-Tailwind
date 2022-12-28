@@ -34,6 +34,8 @@ export default defineNuxtConfig({
 })
 ```
 
+3. (Optional) Create a tailwind.config.ts file in the root directory
+
 ## Editor Support
 
 ### 1. IntelliSense for VS Code
@@ -68,17 +70,18 @@ for VS code:
 }
 ```
 
-for prettier:
+Prettier will find tailwind.config.ts at the same dir as .prettierrc. If your config file is somewhere else, specify this using the tailwindConfig option.
 
 ```json
 // .prettierrc
 {
-  "tailwindConfig": ".nuxt/tailwind.config.cjs",
+  "tailwindConfig": "./styles/tailwind.config.ts",
 }
 ```
 
 ## Official plugins
 
-### @tailwindcss/forms
+[@tailwindcss/forms](https://github.com/tailwindlabs/tailwindcss-forms) plugin provides a basic reset for form styles that makes form elements easy to override with utilities
 
-[@tailwindcss/forms](https://github.com/tailwindlabs/tailwindcss-forms) plugin that provides a basic reset for form styles that makes form elements easy to override with utilities
+## Component library
+[daisyui](https://daisyui.com/) can be installed as a Tailwind CSS plugin
