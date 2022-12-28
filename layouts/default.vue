@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <div class="flex min-h-screen flex-col">
     <NavBar />
-    <slot/>
+    <slot class="flex-1" />
+    <Footer class="mt-auto" />
   </div>
 </template>
