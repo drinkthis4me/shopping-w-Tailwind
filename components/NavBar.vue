@@ -46,8 +46,8 @@
                 </svg>
               </button>
             </NuxtLink>
-            <!-- Profile dropdown -->
-            <div class="relative ml-3">
+            <!-- Profile dropdown if isLogin-->
+            <div v-if="isLogin" class="relative ml-3">
               <div>
                 <button
                   @click="toggle"
@@ -89,6 +89,21 @@
                 </div>
               </transition>
             </div>
+            <div v-else class="relative ml-3">
+         <a href="/users/login">
+                <button
+                 
+                  class="focus:shadow-solid flex max-w-xs items-center rounded p-1 text-3xl text-gray-400 hover:bg-red-500 hover:text-white focus:text-white focus:outline-none"
+                  id="user-menu"
+                  aria-label="User menu"
+                  aria-haspopup="true">
+                  <svg width="32" height="32" viewBox="0 0 24 24">
+                    <path
+                      fill="currentColor"
+                      d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4s-4 1.79-4 4s1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                  </svg>
+                </button></a>
+              </div>
           </div>
         </div>
         <div class="-mr-2 flex md:hidden">
@@ -198,12 +213,16 @@ export default defineComponent({
     function toggle() {
       isOpen.value = !isOpen.value
     }
+
+    const isLogin = ref(false)
     return {
       products,
       userCenter,
 
       isOpen,
       toggle,
+
+      isLogin,
     }
   },
 })
