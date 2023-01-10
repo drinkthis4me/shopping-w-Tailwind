@@ -182,10 +182,7 @@ export default defineComponent({
     }
 
     function onSubmit() {
-      // Http POST request
       postRequest(emailInput.value)
-
-      // Show result message
       console.log('>>> Subscribe success!')
     }
 
