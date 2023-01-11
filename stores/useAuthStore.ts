@@ -3,6 +3,7 @@ import type { User } from '~~/types/user'
 
 export const useAuthStore = defineStore('auth', () => {
   const currentUser = ref<User | null>(null)
+  const statusMsg = ref('')
 
   async function login(
     userEmail: string,
@@ -21,8 +22,9 @@ export const useAuthStore = defineStore('auth', () => {
         console.log('>>> Login request', response)
         currentUser.value = response.user
       })
-      .catch((error) => {
-        throw error
+      .catch((e) => {
+        statusMsg.value = e.toString()
+        throw e
       })
 
     return currentUser.value
@@ -38,6 +40,7 @@ export const useAuthStore = defineStore('auth', () => {
       })
       .catch((e) => {
         console.error('>>> Logout error: ', e)
+        statusMsg.value = e.toString()
         throw e
       })
   }
@@ -49,7 +52,10 @@ export const useAuthStore = defineStore('auth', () => {
       .then((response) => {
         currentUser.value = response.user
       })
-      .catch((e) => console.log('>>> whoAmI error: ', e))
+      .catch((e) => {
+        statusMsg.value = e.toString()
+        console.log('>>> whoAmI error: ', e)
+      })
     return currentUser.value
   }
 
@@ -65,14 +71,16 @@ export const useAuthStore = defineStore('auth', () => {
         console.log('>>> Sign up request: ', response)
         currentUser.value = response.user
       })
-      .catch((error) => {
-        throw error
+      .catch((e) => {
+        statusMsg.value = e.toString()
+        throw e
       })
     return currentUser.value
   }
 
   return {
     currentUser,
+    statusMsg,
     login,
     logout,
     signup,

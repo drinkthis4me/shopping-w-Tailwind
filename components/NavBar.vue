@@ -17,7 +17,7 @@
                 v-for="p in products"
                 :key="p.title"
                 :to="p.link"
-                class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white focus:bg-gray-700 focus:text-white hover:bg-red-500 focus:outline-none">
+                class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white hover:bg-red-500 focus:bg-gray-700 focus:text-white focus:outline-none">
                 {{ p.title }}
               </NuxtLink>
             </div>
@@ -47,7 +47,7 @@
               </button>
             </NuxtLink>
             <!-- Profile dropdown if isLogin-->
-            <div v-if="isLogin" class="relative ml-3">
+            <div v-if="authStore.currentUser" class="relative ml-3">
               <div>
                 <button
                   @click="toggle"
@@ -71,28 +71,27 @@
                 leave-to-class="transform opacity-0 scale-95">
                 <div
                   v-show="isOpen"
-                  class="absolute right-0 mt-2 w-48 origin-top-right rounded-md shadow-lg z-[100]">
+                  class="absolute right-0 z-[100] mt-2 w-48 origin-top-right rounded-md shadow-lg">
                   <div
                     class="shadow-xs rounded-md bg-white py-1"
                     role="menu"
                     aria-orientation="vertical"
                     aria-labelledby="user-menu">
-                    <a
+                    <NuxtLink
                       v-for="u in userCenter"
                       :key="u.title"
-                      href="#"
+                      :to="u.link"
                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300"
                       role="menuitem">
                       {{ u.title }}
-                    </a>
+                    </NuxtLink>
                   </div>
                 </div>
               </transition>
             </div>
             <div v-else class="relative ml-3">
-         <a href="/users/login">
+              <NuxtLink to="/users/login">
                 <button
-                 
                   class="focus:shadow-solid flex max-w-xs items-center rounded p-1 text-3xl text-gray-400 hover:bg-red-500 hover:text-white focus:text-white focus:outline-none"
                   id="user-menu"
                   aria-label="User menu"
@@ -102,8 +101,9 @@
                       fill="currentColor"
                       d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4s-4 1.79-4 4s1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                   </svg>
-                </button></a>
-              </div>
+                </button>
+              </NuxtLink>
+            </div>
           </div>
         </div>
         <div class="-mr-2 flex md:hidden">
@@ -162,68 +162,54 @@
   </nav>
 </template>
 
-<script lang="ts">
-export default defineComponent({
-  name: 'NavBar',
-  setup() {
-    const products = [
-      {
-        title: 'Tops',
-        link: '/products/',
-      },
-      {
-        title: 'Buttoms',
-        link: '/',
-      },
-      {
-        title: 'Socks',
-        link: '/',
-      },
-      {
-        title: 'Others',
-        link: '/',
-      },
-    ]
-
-    const userCenter = [
-      {
-        title: 'Sign in',
-        link: '/',
-      },
-      {
-        title: 'Sign up',
-        link: '/',
-      },
-      {
-        title: 'Your Profile',
-        link: '/',
-      },
-      {
-        title: 'Settings',
-        link: '/',
-      },
-      {
-        title: 'Help',
-        link: '/',
-      },
-    ]
-
-    const isOpen = ref(false)
-
-    function toggle() {
-      isOpen.value = !isOpen.value
-    }
-
-    const isLogin = ref(false)
-    return {
-      products,
-      userCenter,
-
-      isOpen,
-      toggle,
-
-      isLogin,
-    }
+<script setup lang="ts">
+import { useAuthStore } from '~~/stores/useAuthStore'
+const authStore = useAuthStore()
+const products = [
+  {
+    title: 'Tops',
+    link: '/products/',
   },
-})
+  {
+    title: 'Buttoms',
+    link: '/',
+  },
+  {
+    title: 'Socks',
+    link: '/',
+  },
+  {
+    title: 'Others',
+    link: '/',
+  },
+]
+
+const userCenter = [
+  {
+    title: 'Your Profile',
+    link: '/users/profile',
+  },
+  {
+    title: 'Settings',
+    link: '/',
+  },
+  {
+    title: 'Order Status',
+    link: '/',
+  },
+  {
+    title: 'Help',
+    link: '/pages/faqs',
+  },
+  {
+    title: 'Log out',
+    link: '/users/logout',
+  },
+]
+
+const isOpen = ref(false)
+
+function toggle() {
+  isOpen.value = !isOpen.value
+}
 </script>

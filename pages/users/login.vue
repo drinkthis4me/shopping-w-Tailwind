@@ -1,19 +1,19 @@
 <template>
   <div>
-    <div class="flex justify-center">
-      <div class="p-8">
-        <PageErrorBanner :msg="errorMsg" v-show="errorMsg.length > 0" />
+    <div class="flex flex-col justify-center">
+      <div class="mx-auto my-5">
         <LoginForm
           @login-success="onLoginSuccess"
-          @signup-success="onSignupSuccess"
-          @error="errorMsg = 'error testing'" />
+          @signup-success="onSignupSuccess" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const errorMsg = ref('')
+definePageMeta({
+  middleware: ['guest-only']
+})
 
 function onLoginSuccess() {
   navigateTo('/')
