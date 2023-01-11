@@ -17,7 +17,7 @@
                 v-for="p in products"
                 :key="p.title"
                 :to="p.link"
-                class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white hover:bg-red-500 focus:bg-gray-700 focus:text-white focus:outline-none">
+                class="hover:bg-primary rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white hover:text-slate-700 focus:bg-gray-700 focus:text-white focus:outline-none">
                 {{ p.title }}
               </NuxtLink>
             </div>
@@ -26,7 +26,7 @@
         <div class="hidden md:block">
           <div class="ml-4 flex items-center md:ml-6">
             <button
-              class="rounded border-2 border-transparent p-1 text-3xl text-gray-400 hover:bg-red-500 hover:text-white focus:text-white focus:outline-none"
+              class="hover:bg-primary rounded border-2 border-transparent p-1 text-3xl text-gray-400 hover:text-slate-700 focus:text-white focus:outline-none"
               aria-label="Search">
               <svg width="32" height="32" viewBox="0 0 24 24">
                 <path
@@ -37,7 +37,7 @@
 
             <NuxtLink to="/cart">
               <button
-                class="rounded border-2 border-transparent p-1 text-3xl text-gray-400 hover:bg-red-500 hover:text-white focus:text-white focus:outline-none"
+                class="hover:bg-primary rounded border-2 border-transparent p-1 text-3xl text-gray-400 hover:text-slate-700 focus:text-white focus:outline-none"
                 aria-label="Shopping cart">
                 <svg width="32" height="32" viewBox="0 0 24 24">
                   <path
@@ -51,7 +51,7 @@
               <div>
                 <button
                   @click="toggle"
-                  class="focus:shadow-solid flex max-w-xs items-center rounded p-1 text-3xl text-gray-400 hover:bg-red-500 hover:text-white focus:text-white focus:outline-none"
+                  class="focus:shadow-solid hover:bg-primary flex max-w-xs items-center rounded p-1 text-3xl text-gray-400 hover:text-slate-700 focus:text-white focus:outline-none"
                   id="user-menu"
                   aria-label="User menu"
                   aria-haspopup="true">
@@ -92,7 +92,7 @@
             <div v-else class="relative ml-3">
               <NuxtLink to="/users/login">
                 <button
-                  class="focus:shadow-solid flex max-w-xs items-center rounded p-1 text-3xl text-gray-400 hover:bg-red-500 hover:text-white focus:text-white focus:outline-none"
+                  class="focus:shadow-solid hover:bg-primary flex max-w-xs items-center rounded p-1 text-3xl text-gray-400 hover:text-slate-700 focus:text-white focus:outline-none"
                   id="user-menu"
                   aria-label="User menu"
                   aria-haspopup="true">
@@ -110,7 +110,7 @@
           <!-- Mobile menu button -->
           <button
             @click="toggle"
-            class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-red-500 hover:text-white focus:bg-gray-700 focus:text-white focus:outline-none">
+            class="hover:bg-primary inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:text-slate-700 focus:bg-gray-700 focus:text-white focus:outline-none">
             <svg
               :class="[isOpen ? 'hidden' : 'block', 'h-6 w-6']"
               stroke="currentColor"
@@ -143,17 +143,19 @@
           v-for="p in products"
           :key="p.title"
           :to="p.link"
-          class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white hover:bg-red-500 focus:bg-gray-700 focus:text-white focus:outline-none">
+          class="hover:bg-primary block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white focus:bg-gray-700 focus:text-white focus:outline-none">
           {{ p.title }}
         </NuxtLink>
       </div>
-      <div class="border-t border-gray-700 pt-4 pb-3">
+      <div
+        v-show="authStore.currentUser"
+        class="border-t border-gray-700 pt-4 pb-3">
         <div class="px-2">
           <NuxtLink
             v-for="u in userCenter"
             :key="u.title"
             href="#"
-            class="mt-1 block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-red-500 hover:text-white focus:bg-gray-700 focus:text-white focus:outline-none">
+            class="hover:bg-primary mt-1 block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:text-slate-700 focus:bg-gray-700 focus:text-white focus:outline-none">
             {{ u.title }}
           </NuxtLink>
         </div>

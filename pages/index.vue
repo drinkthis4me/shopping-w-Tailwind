@@ -3,7 +3,7 @@
     <header class="bg-white shadow">
       <div class="mx-auto">
         <h1
-          class="py-3 text-center text-3xl font-bold leading-tight text-red-600">
+          class="py-3 text-center text-3xl font-bold leading-tight text-slate-800">
           Fancy Company Title
         </h1>
         <div class="carousel-wrapper">

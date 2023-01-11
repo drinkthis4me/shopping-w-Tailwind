@@ -73,7 +73,7 @@
           </form>
           <NuxtLink
             to="/users/forgot-password"
-            class="hover:text-secondary focus:ring-primary mt-4 block text-center text-sm font-medium hover:underline focus:outline-none focus:ring-2">
+            class="hover:text-primary focus:ring-primary mt-4 block text-center text-sm font-medium hover:underline focus:outline-none focus:ring-2">
             Forgot your password?
           </NuxtLink>
         </section>
@@ -124,17 +124,17 @@
             <div class="form-control mt-4">
               <div class="inline-block">
                 By signing up, you agree to <br />the
-                <a
-                  href="/pages/terms-of-service"
-                  class="text-secondary text-sm font-medium hover:underline">
+                <NuxtLink
+                  to="/pages/terms-of-service"
+                  class="text-info text-sm font-medium hover:underline">
                   Terms of Service
-                </a>
+                </NuxtLink>
                 and
-                <a
-                  href="/pages/privacy-policy"
-                  class="text-secondary text-sm font-medium hover:underline">
+                <NuxtLink
+                  to="/pages/privacy-policy"
+                  class="text-info text-sm font-medium hover:underline">
                   Privacy Policy
-                </a>
+                </NuxtLink>
               </div>
 
               <button v-if="!signupInput.pending" class="btn btn-primary mt-4">
