@@ -9,7 +9,7 @@
         $emit('update:modelValue', ($event.target as HTMLSelectElement).value)
       "
       :id="labelName"
-      class="cursor-pointer border hover:border-primary bg-white p-2">
+      class="hover:border-primary cursor-pointer border bg-white p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
       <option v-for="option in listOptions" :key="option" :value="option">
         {{ option }}
       </option>

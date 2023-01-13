@@ -6,7 +6,7 @@
     <div class="relative">
       <button
         type="button"
-        class="btn btn-primary absolute top-0 left-0 h-full min-h-0 w-10 rounded-none text-2xl"
+        class="btn btn-primary absolute top-0 left-0 h-full min-h-0 w-10 rounded-none text-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
         @click="onMinusClick">
         -
       </button>
@@ -17,10 +17,10 @@
           $emit('update:modelValue', ($event.target as HTMLInputElement).value)
         "
         type="number"
-        class="w-full appearance-none border border-slate-200 p-2 text-center hover:border-primary" />
+        class="w-full appearance-none border border-slate-200 p-2 text-center hover:border-primary focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" />
       <button
         type="button"
-        class="btn btn-primary absolute top-0 right-0 h-full min-h-0 w-10 rounded-none text-2xl"
+        class="btn btn-primary absolute top-0 right-0 h-full min-h-0 w-10 rounded-none text-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
         @click="onPlusClick">
         +
       </button>
