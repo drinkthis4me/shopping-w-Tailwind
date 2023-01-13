@@ -10,15 +10,24 @@
       "
       :id="labelName"
       class="hover:border-primary cursor-pointer border bg-white p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-      <option v-for="option in listOptions" :key="option" :value="option">
-        {{ option }}
+      <option
+        v-for="option in listOptions"
+        :key="option.name"
+        :value="option.name"
+        :disabled="!option.inStock">
+        {{ option.name }}
       </option>
     </select>
   </div>
 </template>
 
 <script setup lang="ts">
-defineProps<{ labelName: string; listOptions: string[]; modelValue: string }>()
+import type { Color, Size } from '~~/types/product'
+defineProps<{
+  labelName: string
+  listOptions: Color[] | Size[]
+  modelValue: string
+}>()
 
 defineEmits(['update:modelValue'])
 </script>

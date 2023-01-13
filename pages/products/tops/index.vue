@@ -1,62 +1,13 @@
 <template>
-  <div class="bg-white pt-10">
-    <nav aria-label="Breadcrumb">
-      <ol
-        role="list"
-        class="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-        <li v-for="breadcrumb in product.breadcrumbs" :key="breadcrumb.id">
-          <div class="flex items-center">
-            <a
-              :href="breadcrumb.href"
-              class="mr-2 text-sm font-medium text-gray-900"
-              >{{ breadcrumb.name }}</a
-            >
-            <svg
-              width="16"
-              height="20"
-              viewBox="0 0 16 20"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-              class="h-5 w-4 text-gray-300">
-              <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
-            </svg>
-          </div>
-        </li>
-        <li class="text-sm">
-          <a
-            :href="product.href"
-            aria-current="page"
-            class="font-medium text-gray-500 hover:text-gray-600"
-            >{{ product.name }}</a
-          >
-        </li>
-      </ol>
-    </nav>
-
+  <div class="bg-white pt-7">
+    <PageBreadcrumb :product="product" />
     <div
       class="mx-auto mt-5 flex max-w-2xl flex-row-reverse flex-wrap justify-center lg:max-w-7xl lg:gap-x-8">
-      <!-- Carouse start -->
-      <div class="carousel w-[450px] max-w-md basis-full">
-        <div
-          v-for="n in 4"
-          :key="n"
-          :id="`item${n}`"
-          class="carousel-item w-full">
-          <img
-            src="https://www.shutterstock.com/shutterstock/photos/1078474880/display_1500/stock-photo-black-plain-shortsleeve-cotton-t-shirt-isolated-on-a-white-background-stylish-round-collar-shirt-1078474880.jpg"
-            class="w-full" />
-        </div>
+      <div class="max-w-md basis-full">
+        <ProductCarousel :images="product.images" />
       </div>
-      <!-- Indicator start -->
-      <div class="flex justify-center gap-x-1 py-2 px-5 lg:flex-col">
-        <div v-for="n in 4" :key="n">
-          <a :href="`#item${n}`">
-            <img
-              src="https://www.shutterstock.com/shutterstock/photos/1078474880/display_1500/stock-photo-black-plain-shortsleeve-cotton-t-shirt-isolated-on-a-white-background-stylish-round-collar-shirt-1078474880.jpg"
-              class="w-20" />
-          </a>
-        </div>
+      <div class="pt-5">
+        <ProductCarouselIndicator :images="product.images" />
       </div>
     </div>
 
@@ -84,13 +35,13 @@
           <div class="mx-auto max-w-md">
             <FormSelectOptions
               :label-name="'Color'"
-              :list-options="colors"
+              :list-options="product.colors"
               v-model="selectedColor" />
           </div>
           <div class="mx-auto max-w-md">
             <FormSelectOptions
               :label-name="'Size'"
-              :list-options="sizes"
+              :list-options="product.sizes"
               @update:model-value="(v) => (selectedSize = v)"
               v-model="selectedSize" />
           </div>
@@ -152,7 +103,8 @@
 </template>
 
 <script setup lang="ts">
-const product = {
+import type { Product } from '~~/types/product'
+const product: Product = {
   name: 'Spring Limited Edition T-Shirt ',
   price: 2000,
   href: '#',
@@ -179,9 +131,24 @@ const product = {
     },
   ],
   colors: [
-    { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
-    { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
-    { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
+    {
+      name: 'White',
+      inStock: true,
+      class: 'bg-white',
+      selectedClass: 'ring-gray-400',
+    },
+    {
+      name: 'Gray',
+      inStock: true,
+      class: 'bg-gray-200',
+      selectedClass: 'ring-gray-400',
+    },
+    {
+      name: 'Black',
+      inStock: true,
+      class: 'bg-gray-900',
+      selectedClass: 'ring-gray-900',
+    },
   ],
   sizes: [
     { name: 'XXS', inStock: false },
@@ -190,7 +157,7 @@ const product = {
     { name: 'M', inStock: true },
     { name: 'L', inStock: true },
     { name: 'XL', inStock: true },
-    { name: '2XL', inStock: true },
+    { name: '2XL', inStock: false },
     { name: '3XL', inStock: true },
   ],
   description:
@@ -204,11 +171,9 @@ const product = {
   details:
     'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
 }
-const colors = ref(['Black', 'White', 'Red', 'Green', 'Blue'])
-const selectedColor = ref(colors.value[0])
+const selectedColor = ref(product.colors[0].name)
 
-const sizes = ref(['XS', 'S', 'M', 'L', 'XL'])
-const selectedSize = ref(sizes.value[0])
+const selectedSize = ref(product.sizes[0].name)
 
 const quantity = ref(1)
 
