@@ -7,7 +7,7 @@
           Fancy Company Title
         </h1>
         <div class="carousel-wrapper">
-          <div class="carousel min-h-full w-full" ref="carouselRef">
+          <div class="carousel max-h-full w-full" ref="carouselRef">
             <div
               v-for="n in 4"
               :key="n"
@@ -33,158 +33,185 @@
       </div>
     </header>
     <main>
-      <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-        <div class="siteMap">
-          <ul>
-            <li v-for="link in websiteMap" :key="link.title">
-              {{ link.title }}
-              <ul v-if="link.child">
-                <li v-for="clink in link.child" :key="clink.title" class="ml-6">
-                  {{ clink.title }}
-                </li>
-              </ul>
-            </li>
-          </ul>
+      <div class="bg-white">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="mx-auto max-w-2xl py-5 sm:py-10 lg:max-w-none">
+            <h2 class="text-3xl font-bold">Collections</h2>
+            <div
+              class="mt-5 md:grid md:grid-cols-2 md:space-x-2 lg:grid-cols-4">
+              <div v-for="c in collections" :key="c.name" class="mb-5 lg:mb-0">
+                <NuxtLink :to="c.href" class="group">
+                  <div
+                    class="relative h-80 w-full overflow-hidden group-hover:opacity-75">
+                    <img
+                      :src="c.imageSrc"
+                      :alt="c.imageAlt"
+                      class="h-full w-full object-cover object-center" />
+                  </div>
+                  <h3 class="mt-2 text-lg font-semibold">
+                    <span>{{ c.name }}</span>
+                  </h3>
+                  <h3>
+                    <p class="text-sm text-slate-500">{{ c.description }}</p>
+                  </h3>
+                </NuxtLink>
+              </div>
+            </div>
+          </div>
         </div>
-        <button class="btn">Button</button>
-        <button class="btn btn-primary">Button</button>
-        <button class="btn btn-secondary">Button</button>
-        <button class="btn btn-accent">Button</button>
-        <button class="btn btn-ghost">Button</button>
-        <button class="btn btn-link">Button</button>
-        <div class="px-4 py-6 sm:px-0"></div>
       </div>
     </main>
   </div>
 </template>
 
-<script lang="ts">
-export default defineComponent({
-  name: 'IndexPage',
-  setup() {
-    const websiteMap = [
-      {
-        title: 'Home',
-        link: '/',
-        child: [],
-      },
-
-      {
-        title: 'Products',
-        link: '/products',
-        child: [
-          {
-            title: 'Tops',
-            link: '/products/tops',
-            child: [
-              {
-                title: 'tshirt 1',
-                link: '/products/tops/tshirt-1',
-              },
-              {
-                title: 'tshirt 2',
-                link: '/products/tops/tshirt-2',
-              },
-            ],
-          },
-          {
-            title: 'Buttoms',
-            link: '/products/buttoms',
-          },
-          {
-            title: 'Socks',
-            link: '/products/socks',
-          },
-          {
-            title: 'Others',
-            link: '/products/others',
-          },
-        ],
-      },
-      {
-        title: 'Service',
-        link: '/pages/',
-        child: [
-          {
-            title: 'About',
-            link: '/pages/about',
-          },
-          {
-            title: 'Contact',
-            link: '/pages/contact',
-          },
-          {
-            title: 'FAQs',
-            link: '/pages/faqs',
-          },
-          {
-            title: 'Privacy Policy',
-            link: '/pages/privacy-policy',
-          },
-          {
-            title: 'Terms of Service',
-            link: '/pages/terms-of-service',
-          },
-        ],
-      },
-      {
-        title: 'Members',
-        link: '/users',
-        child: [
-          {
-            title: 'Your Profile',
-            link: '/users/profile',
-          },
-          {
-            title: 'Settings',
-            link: '/users/settings',
-          },
-          {
-            title: 'Order Status',
-            link: '/users/order-status',
-          },
-          {
-            title: 'Returns',
-            link: '/users/returns',
-          },
-          {
-            title: 'Settings',
-            link: '/users/settings',
-          },
-        ],
-      },
-      {
-        title: 'Cart',
-        link: '/cart',
-        child: [],
-      },
-    ]
-
-    const carouselRef = ref<HTMLDivElement | null>(null)
-
-    function autoslider(numSlides: number) {
-      if (carouselRef.value !== null) {
-        let slide = 0
-        const target = carouselRef.value
-        setInterval(() => {
-          if (slide >= target.scrollWidth) {
-            slide = 0
-          } else {
-            slide += target.scrollWidth / numSlides
-          }
-          target.scrollLeft = slide
-        }, 6000) // 6 sec delay between each slide
-      }
-    }
-
-    onMounted(() => {
-      autoslider(4)
-    })
-
-    return {
-      websiteMap,
-      carouselRef,
-    }
+<script setup lang="ts">
+const websiteMap = [
+  {
+    title: 'Home',
+    link: '/',
+    child: [],
   },
+
+  {
+    title: 'Products',
+    link: '/products',
+    child: [
+      {
+        title: 'Tops',
+        link: '/products/tops',
+        child: [
+          {
+            title: 'tshirt 1',
+            link: '/products/tops/tshirt-1',
+          },
+          {
+            title: 'tshirt 2',
+            link: '/products/tops/tshirt-2',
+          },
+        ],
+      },
+      {
+        title: 'Buttoms',
+        link: '/products/buttoms',
+      },
+      {
+        title: 'Socks',
+        link: '/products/socks',
+      },
+      {
+        title: 'Others',
+        link: '/products/others',
+      },
+    ],
+  },
+  {
+    title: 'Service',
+    link: '/pages/',
+    child: [
+      {
+        title: 'About',
+        link: '/pages/about',
+      },
+      {
+        title: 'Contact',
+        link: '/pages/contact',
+      },
+      {
+        title: 'FAQs',
+        link: '/pages/faqs',
+      },
+      {
+        title: 'Privacy Policy',
+        link: '/pages/privacy-policy',
+      },
+      {
+        title: 'Terms of Service',
+        link: '/pages/terms-of-service',
+      },
+    ],
+  },
+  {
+    title: 'Members',
+    link: '/users',
+    child: [
+      {
+        title: 'Your Profile',
+        link: '/users/profile',
+      },
+      {
+        title: 'Settings',
+        link: '/users/settings',
+      },
+      {
+        title: 'Order Status',
+        link: '/users/order-status',
+      },
+      {
+        title: 'Returns',
+        link: '/users/returns',
+      },
+      {
+        title: 'Settings',
+        link: '/users/settings',
+      },
+    ],
+  },
+  {
+    title: 'Cart',
+    link: '/cart',
+    child: [],
+  },
+]
+
+const collections = [
+  {
+    name: 'Tops',
+    description: 'Daily essentials t-shirts',
+    imageSrc: '/img/collection-tshirt-pexels-j-sarkar-991509.jpg',
+    imageAlt: 'Men in a white t-shirt.',
+    href: '/products/tops',
+  },
+  {
+    name: 'Buttoms',
+    description: 'Fasnionable jeans and pants',
+    imageSrc: '/img/collection-jeans-pexels-anna-shvets-4557647.jpg',
+    imageAlt: 'Two girls in jeans holding hands.',
+    href: '#',
+  },
+  {
+    name: 'Socks',
+    description: 'High quality cotton socks',
+    imageSrc: '/img/collection-socks-pexels-mikhail-nilov-6968427.jpg',
+    imageAlt: 'Feet cross with white socks.',
+    href: '#',
+  },
+  {
+    name: 'Others',
+    description: 'Designers chosen handbags and more',
+    imageSrc: '/img/collection-bag-pexels-godisable-jacob-1936848.jpg',
+    imageAlt: 'Woman holding a brown handbag.',
+    href: '#',
+  },
+]
+
+const carouselRef = ref<HTMLDivElement | null>(null)
+
+function autoslider(numSlides: number) {
+  if (carouselRef.value !== null) {
+    let slide = 0
+    const target = carouselRef.value
+    setInterval(() => {
+      if (slide >= target.scrollWidth) {
+        slide = 0
+      } else {
+        slide += target.scrollWidth / numSlides
+      }
+      target.scrollLeft = slide
+    }, 6000) // 6 sec delay between each slide
+  }
+}
+
+onMounted(() => {
+  autoslider(4)
 })
 </script>
