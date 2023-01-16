@@ -25,12 +25,23 @@ export interface Image {
 export interface Color {
   name: string
   class: string
-  selectedClass:string
+  selectedClass: string
   inStock: boolean
 }
-
 
 export interface Size {
   name: string
   inStock: boolean
+}
+
+export interface ProductOverview {
+  id: number
+  name: string
+  coverImage: {
+    src: string
+    alt: string
+  }
+  price: number
+  href: string
+  description: string
 }

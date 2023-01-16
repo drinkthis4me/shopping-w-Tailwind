@@ -17,7 +17,7 @@
                 <span>{{ c.name }}</span>
               </h3>
               <h3>
-                <p class="text-sm text-slate-500">{{ c.description }}</p>
+                <span class="text-sm text-slate-500">{{ c.description }}</span>
               </h3>
             </NuxtLink>
           </div>
