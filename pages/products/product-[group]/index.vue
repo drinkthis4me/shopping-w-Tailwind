@@ -1,12 +1,14 @@
 <template>
   <div class="bg-white">
-    <div class="mx-auto max-w-7xl py-10 px-5">
+    <div class="mx-auto max-w-7xl py-7 px-5">
       <PageBreadcrumb :breadcrumbs="breadcrumbs" :current="'Tops'" />
       <h2 class="mt-3 text-3xl font-bold">{{ targetList?.listName }}</h2>
-      <div
-        class="mt-5 grid justify-center gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-20">
-        <ProductCard :product-overview="p" v-for="p in targetList?.list" :key="p.id" />
-      </div>
+      <ul
+        class="mt-5 grid justify-start gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-20">
+        <li v-for="p in targetList?.list" :key="p.id">
+          <ProductCard :product-overview="p" />
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -182,8 +184,10 @@ const productList = [
 
 const route = useRoute()
 const currentParams = route.params.group
-const targetList = productList.find(list=>list.listName.toLowerCase()===currentParams)
+const targetList = productList.find(
+  (list) => list.listName.toLowerCase() === currentParams
+)
 
-if(!targetList)
-createError({ statusCode: 404, statusMessage: 'Page Not Found' })
+if (!targetList)
+  createError({ statusCode: 404, statusMessage: 'Page Not Found' })
 </script>

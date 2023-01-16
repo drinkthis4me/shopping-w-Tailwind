@@ -1,9 +1,6 @@
 <template>
   <div>
-    <h1>
-      Tops for product id:  {{ $route.params.id }}
-    </h1>
-    <div class="bg-white pt-7">
+    <div class="bg-white py-7 px-5">
       <PageBreadcrumb
         :breadcrumbs="product.breadcrumbs"
         :current="product.name" />
@@ -116,7 +113,7 @@ const product: Product = {
   href: '#',
   breadcrumbs: [
     { id: 1, name: 'Home', href: '/' },
-    { id: 2, name: 'Tops', href: '/products/tops' },
+    { id: 2, name: 'Tops', href: '/products/product-tops' },
   ],
   images: [
     {

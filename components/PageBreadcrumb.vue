@@ -2,7 +2,7 @@
   <nav aria-label="Breadcrumb">
     <ol
       role="list"
-      class="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+      class="mx-auto flex items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
       <li v-for="b in breadcrumbs" :key="b.id">
         <div class="flex items-center">
           <NuxtLink
