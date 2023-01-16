@@ -13,17 +13,17 @@
               :key="n"
               :id="`slide${n}`"
               class="carousel-item relative w-full">
-              <img src="https://placeimg.com/800/400/arch" class="w-full" />
+              <img src="https://placeimg.com/800/400/arch" alt="Random placeholder image" class="w-full" />
               <div
                 class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
                 <a
                   :href="`#slide${n - 1 > 0 ? n - 1 : 4}`"
-                  class="btn btn-circle border-0 bg-transparent hover:bg-red-500/75">
+                  class="btn btn-circle border-0 bg-transparent hover:bg-primary/75">
                   ❮
                 </a>
                 <a
                   :href="`#slide${n + 1 < 5 ? n + 1 : 1}`"
-                  class="btn btn-circle border-0 bg-transparent hover:bg-red-500/75">
+                  class="btn btn-circle border-0 bg-transparent hover:bg-primary/75">
                   ❯
                 </a>
               </div>
@@ -34,7 +34,7 @@
     </header>
     <main>
       <div class="bg-white">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div class="mx-auto max-w-2xl py-5 sm:py-10 lg:max-w-none">
             <h2 class="text-3xl font-bold">Collections</h2>
             <div
@@ -65,104 +65,6 @@
 </template>
 
 <script setup lang="ts">
-const websiteMap = [
-  {
-    title: 'Home',
-    link: '/',
-    child: [],
-  },
-
-  {
-    title: 'Products',
-    link: '/products',
-    child: [
-      {
-        title: 'Tops',
-        link: '/products/tops',
-        child: [
-          {
-            title: 'tshirt 1',
-            link: '/products/tops/tshirt-1',
-          },
-          {
-            title: 'tshirt 2',
-            link: '/products/tops/tshirt-2',
-          },
-        ],
-      },
-      {
-        title: 'Buttoms',
-        link: '/products/buttoms',
-      },
-      {
-        title: 'Socks',
-        link: '/products/socks',
-      },
-      {
-        title: 'Others',
-        link: '/products/others',
-      },
-    ],
-  },
-  {
-    title: 'Service',
-    link: '/pages/',
-    child: [
-      {
-        title: 'About',
-        link: '/pages/about',
-      },
-      {
-        title: 'Contact',
-        link: '/pages/contact',
-      },
-      {
-        title: 'FAQs',
-        link: '/pages/faqs',
-      },
-      {
-        title: 'Privacy Policy',
-        link: '/pages/privacy-policy',
-      },
-      {
-        title: 'Terms of Service',
-        link: '/pages/terms-of-service',
-      },
-    ],
-  },
-  {
-    title: 'Members',
-    link: '/users',
-    child: [
-      {
-        title: 'Your Profile',
-        link: '/users/profile',
-      },
-      {
-        title: 'Settings',
-        link: '/users/settings',
-      },
-      {
-        title: 'Order Status',
-        link: '/users/order-status',
-      },
-      {
-        title: 'Returns',
-        link: '/users/returns',
-      },
-      {
-        title: 'Settings',
-        link: '/users/settings',
-      },
-    ],
-  },
-  {
-    title: 'Cart',
-    link: '/cart',
-    child: [],
-  },
-]
-
 const collections = [
   {
     name: 'Tops',
