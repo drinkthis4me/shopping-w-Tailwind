@@ -41,7 +41,7 @@ const collections = [
     description: 'Fasnionable jeans and pants',
     imageSrc: '/img/collection-jeans-pexels-anna-shvets-4557647.jpg',
     imageAlt: 'Two girls in jeans holding hands.',
-    href: '#',
+    href: '/products/bottoms',
   },
   {
     name: 'Socks',
