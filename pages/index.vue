@@ -85,7 +85,7 @@ const collections = [
     description: 'High quality cotton socks',
     imageSrc: '/img/collection-socks-pexels-mikhail-nilov-6968427.jpg',
     imageAlt: 'Feet cross with white socks.',
-    href: '#',
+    href: '/products/socks',
   },
   {
     name: 'Others',

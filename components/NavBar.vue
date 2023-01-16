@@ -178,7 +178,7 @@ const products = [
   },
   {
     title: 'Socks',
-    link: '/',
+    link: '/products/socks',
   },
   {
     title: 'Others',
