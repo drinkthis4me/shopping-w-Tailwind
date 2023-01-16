@@ -71,28 +71,28 @@ const collections = [
     description: 'Daily essentials t-shirts',
     imageSrc: '/img/collection-tshirt-pexels-j-sarkar-991509.jpg',
     imageAlt: 'Men in a white t-shirt.',
-    href: '/products/tops',
+    href: '/products/product-tops',
   },
   {
     name: 'Bottoms',
     description: 'Fasnionable jeans and pants',
     imageSrc: '/img/collection-jeans-pexels-anna-shvets-4557647.jpg',
     imageAlt: 'Two girls in jeans holding hands.',
-    href: '/products/bottoms',
+    href: '/products/product-bottoms',
   },
   {
     name: 'Socks',
     description: 'High quality cotton socks',
     imageSrc: '/img/collection-socks-pexels-mikhail-nilov-6968427.jpg',
     imageAlt: 'Feet cross with white socks.',
-    href: '/products/socks',
+    href: '/products/product-socks',
   },
   {
     name: 'Others',
     description: 'Designers chosen handbags and more',
     imageSrc: '/img/collection-bag-pexels-godisable-jacob-1936848.jpg',
     imageAlt: 'Woman holding a brown handbag.',
-    href: '#',
+    href: '/products/product-others',
   },
 ]
 

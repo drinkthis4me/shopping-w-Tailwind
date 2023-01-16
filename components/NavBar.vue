@@ -170,19 +170,19 @@ const authStore = useAuthStore()
 const products = [
   {
     title: 'Tops',
-    link: '/products/tops',
+    link: '/products/product-tops',
   },
   {
     title: 'Bottoms',
-    link: '/products/bottoms',
+    link: '/products/product-bottoms',
   },
   {
     title: 'Socks',
-    link: '/products/socks',
+    link: '/products/product-socks',
   },
   {
     title: 'Others',
-    link: '/',
+    link: '/products/product-others',
   },
 ]
 
