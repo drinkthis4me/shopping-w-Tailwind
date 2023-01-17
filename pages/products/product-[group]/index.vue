@@ -189,5 +189,5 @@ const targetList = productList.find(
 )
 
 if (!targetList)
-  createError({ statusCode: 404, statusMessage: 'Page Not Found' })
+  throw createError({ statusCode: 404, statusMessage: 'Page Not Found' })
 </script>

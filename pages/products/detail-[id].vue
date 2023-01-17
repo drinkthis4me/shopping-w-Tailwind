@@ -1,6 +1,11 @@
 <template>
   <div>
-    <div class="bg-white py-7 px-5">
+    <div
+      v-if="!product"
+      class="grid items-center justify-center text-4xl font-medium">
+      Loading ...
+    </div>
+    <div v-else class="bg-white py-7 px-5">
       <PageBreadcrumb
         :breadcrumbs="product.breadcrumbs"
         :current="product.name" />
@@ -39,13 +44,14 @@
               <FormSelectOptions
                 :label-name="'Color'"
                 :list-options="product.colors"
+                @update:model-value="(value) => (selectedSize = value)"
                 v-model="selectedColor" />
             </div>
             <div class="mx-auto max-w-md">
               <FormSelectOptions
                 :label-name="'Size'"
                 :list-options="product.sizes"
-                @update:model-value="(v) => (selectedSize = v)"
+                @update:model-value="(value) => (selectedSize = value)"
                 v-model="selectedSize" />
             </div>
             <div class="mx-auto max-w-md">
@@ -106,77 +112,22 @@
   </div>
 </template>
 <script setup lang="ts">
-import type { Product } from '~~/types/product'
-const product: Product = {
-  name: 'Spring Limited Edition T-Shirt ',
-  price: 2000,
-  href: '#',
-  breadcrumbs: [
-    { id: 1, name: 'Home', href: '/' },
-    { id: 2, name: 'Tops', href: '/products/product-tops' },
-  ],
-  images: [
-    {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg',
-      alt: 'Two each of gray, white, and black shirts laying flat.',
-    },
-    {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg',
-      alt: 'Model wearing plain black basic tee.',
-    },
-    {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg',
-      alt: 'Model wearing plain gray basic tee.',
-    },
-    {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg',
-      alt: 'Model wearing plain white basic tee.',
-    },
-  ],
-  colors: [
-    {
-      name: 'White',
-      inStock: true,
-      class: 'bg-white',
-      selectedClass: 'ring-gray-400',
-    },
-    {
-      name: 'Gray',
-      inStock: true,
-      class: 'bg-gray-200',
-      selectedClass: 'ring-gray-400',
-    },
-    {
-      name: 'Black',
-      inStock: true,
-      class: 'bg-gray-900',
-      selectedClass: 'ring-gray-900',
-    },
-  ],
-  sizes: [
-    { name: 'XXS', inStock: false },
-    { name: 'XS', inStock: true },
-    { name: 'S', inStock: true },
-    { name: 'M', inStock: true },
-    { name: 'L', inStock: true },
-    { name: 'XL', inStock: true },
-    { name: '2XL', inStock: false },
-    { name: '3XL', inStock: true },
-  ],
-  description:
-    'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
-  highlights: [
-    'Hand cut and sewn locally',
-    'Dyed with our proprietary colors',
-    'Pre-washed & pre-shrunk',
-    'Ultra-soft 100% cotton',
-  ],
-  details:
-    'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
-}
-const selectedColor = ref(product.colors[0].name)
+import type { Color, Size } from '~~/types/product'
+const { data: product } = useLazyFetch('/api/product', {
+  method: 'GET',
+})
 
-const selectedSize = ref(product.sizes[0].name)
+function findFirstInstock(targetOptions: Color[] | Size[] | undefined) {
+  let i = 0
+  if (targetOptions) while (targetOptions[i].inStock === false) i++
+  return i
+}
+
+const inStockColorIndex = findFirstInstock(product.value?.colors)
+const inStockSizeIndex = findFirstInstock(product.value?.sizes)
+
+const selectedColor = ref(product.value?.colors[inStockColorIndex].name || '')
+const selectedSize = ref(product.value?.sizes[inStockSizeIndex].name || '')
 
 const quantity = ref(1)
 
