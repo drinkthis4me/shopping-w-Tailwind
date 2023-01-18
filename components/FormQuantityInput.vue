@@ -12,11 +12,12 @@
       </button>
       <input
         :id="labelName"
-        :value="modelValue"
+        :value="quantity"
         @input="
-          $emit('update:modelValue', ($event.target as HTMLInputElement).value)
+          $emit('update:quantity', ($event.target as HTMLInputElement).value)
         "
         type="number"
+        max="50"
         required
         class="hover:border-primary w-full appearance-none border border-slate-200 p-2 text-center focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" />
       <button
@@ -32,21 +33,21 @@
 <script setup lang="ts">
 const props = defineProps<{
   labelName: string
-  modelValue: number
+  quantity: number
 }>()
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:quantity'])
 
 function isGreaterThanZero(n: number) {
   return n > 0 ? true : false
 }
 
 function onMinusClick() {
-  if (isGreaterThanZero(props.modelValue - 1))
-    emit('update:modelValue', props.modelValue - 1)
+  if (isGreaterThanZero(props.quantity - 1))
+    emit('update:quantity', props.quantity - 1)
 }
 
 function onPlusClick() {
-  emit('update:modelValue', props.modelValue + 1)
+  emit('update:quantity', props.quantity + 1)
 }
 </script>

@@ -44,20 +44,18 @@
               <FormSelectOptions
                 :label-name="'Color'"
                 :list-options="product.colors"
-                @update:model-value="(value) => (selectedSize = value)"
-                v-model="selectedColor" />
+                v-model:model-value="selectedColor" />
             </div>
             <div class="mx-auto max-w-md">
               <FormSelectOptions
                 :label-name="'Size'"
                 :list-options="product.sizes"
-                @update:model-value="(value) => (selectedSize = value)"
-                v-model="selectedSize" />
+                v-model:model-value="selectedSize" />
             </div>
             <div class="mx-auto max-w-md">
               <FormQuantityInput
                 :label-name="'Quantity'"
-                v-model.number="quantity" />
+                v-model:quantity="quantity" />
             </div>
             <div class="form-control mx-auto max-w-md">
               <button
