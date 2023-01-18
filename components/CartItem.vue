@@ -63,12 +63,10 @@
             <span class="label-text">Quantity</span>
           </label>
           <input
-            @change="
-              $emit(
+            @input=" $emit(
                 'update:quantity',
                 ($event.target as HTMLInputElement).value
-              )
-            "
+              )"
             :value="cartItem.quantity"
             type="number"
             required
@@ -81,7 +79,7 @@
     </div>
     <div class="flex flex-col items-center justify-between">
       <div class="block text-lg font-medium">NT${{ cartItem.price }}</div>
-      <button>
+      <button @click="$emit('toBeDeleted', cartItem)">
         <svg
           class="hover:text-secondary"
           xmlns="http://www.w3.org/2000/svg"
@@ -103,5 +101,5 @@ defineProps<{
   cartItem: CartItem
 }>()
 
-defineEmits(['update:color', 'update:size', 'update:quantity'])
+defineEmits(['update:color', 'update:size', 'update:quantity', 'toBeDeleted'])
 </script>
