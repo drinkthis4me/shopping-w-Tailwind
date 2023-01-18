@@ -140,12 +140,27 @@
     <div :class="[isOpen ? '' : 'hidden', 'md:hidden']">
       <div class="px-2 pt-2 pb-3 sm:px-3">
         <NuxtLink
+        @click="toggle"
           v-for="p in products"
           :key="p.title"
           :to="p.link"
           class="hover:bg-primary block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white focus:bg-gray-700 focus:text-white focus:outline-none">
           {{ p.title }}
         </NuxtLink>
+      </div>
+      <div class="border-t border-gray-700 pt-4 pb-3">
+        <div class="flex justify-center px-2">
+          <NuxtLink v-for="u in utility" :key="u.title" :to="u.link">
+            <button
+              @click="toggle"
+              class="hover:bg-primary rounded border-2 border-transparent p-1 text-3xl text-gray-400 hover:text-slate-700 focus:text-white focus:outline-none"
+              :aria-label="u.title">
+              <svg width="32" height="32" viewBox="0 0 24 24">
+                <path fill="currentColor" :d="u.icon_svgpath" />
+              </svg>
+            </button>
+          </NuxtLink>
+        </div>
       </div>
       <div
         v-show="authStore.currentUser"
@@ -206,6 +221,21 @@ const userCenter = [
   {
     title: 'Log out',
     link: '/users/logout',
+  },
+]
+
+const utility = [
+  {
+    title: 'Search',
+    link: '#',
+    icon_svgpath:
+      'M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5A6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14z',
+  },
+  {
+    title: 'Cart',
+    link: '/cart',
+    icon_svgpath:
+      'M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2s-.9-2-2-2zM1 2v2h2l3.6 7.59l-1.35 2.45c-.16.28-.25.61-.25.96c0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12l.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1.003 1.003 0 0 0 20 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2s2-.9 2-2s-.9-2-2-2z',
   },
 ]
 
