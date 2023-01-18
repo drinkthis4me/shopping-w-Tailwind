@@ -26,8 +26,7 @@
             @change="
               $emit('update:size', ($event.target as HTMLSelectElement).value)
             "
-            :value="cartItem.seletedSize"
-            name="size"
+            :value="cartItem.selectedSize"
             id="size"
             class="bg-white pl-1 text-sm">
             <option
@@ -48,7 +47,6 @@
               $emit('update:color', ($event.target as HTMLSelectElement).value)
             "
             :value="cartItem.selectedColor"
-            name="color"
             id="color"
             class="bg-white pl-1 text-sm">
             <option
@@ -61,7 +59,7 @@
           </select>
         </div>
         <div class="flex">
-          <label for="quantity" class="label">
+          <label :for="`quantity-${cartItem.addedTime}`" class="label">
             <span class="label-text">Quantity</span>
           </label>
           <input
@@ -72,9 +70,12 @@
               )
             "
             :value="cartItem.quantity"
-            name="quantity"
-            id="quantity"
-            class="w-5 bg-white pl-1 text-sm" />
+            type="number"
+            required
+            min="1"
+            max="50"
+            :id="`quantity-${cartItem.addedTime}`"
+            class="w-10 appearance-none bg-white pl-1 text-sm" />
         </div>
       </div>
     </div>

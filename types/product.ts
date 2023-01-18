@@ -49,7 +49,7 @@ export interface ProductOverview {
 export interface CartItem extends Product {
   addedTime: string
   selectedColor: string
-  seletedSize: string
+  selectedSize: string
   quantity: number
 }
 
