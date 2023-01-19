@@ -1,8 +1,10 @@
+import type { Product } from '~~/types/product'
 export default defineEventHandler(async () => {
   await new Promise((resolve) => setTimeout(resolve, 2000))
-  const product= {
-    name: 'Spring Limited Edition T-Shirt ',
+  const product: Product= {
+    name: 'Spring Limited Edition T-Shirt',
     price: 2000,
+    id: 'item1001',
     href: '#',
     breadcrumbs: [
       { id: 1, name: 'Home', href: '/' },

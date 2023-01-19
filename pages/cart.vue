@@ -3,8 +3,11 @@
     <div class="mx-auto max-w-7xl px-5 py-10">
       <!-- Title -->
       <h2 class="text-center text-2xl font-bold">Cart</h2>
+      <div v-if="numberOfItems" class="mt-1 text-center text-sm text-slate-600">
+        {{ numberOfItems }} Item{{ numberOfItems > 1 ? 's' : '' }}
+      </div>
       <!-- Items -->
-      <div v-if="cart.items.length" class="mt-5 border-y-2">
+      <div v-if="cart && numberOfItems" class="mt-5 border-y-2">
         <ul class="divide-y">
           <li v-for="item in cart.items" :key="item.addedTime" class="py-5">
             <CartItem
@@ -15,7 +18,7 @@
         </ul>
       </div>
       <!-- Info -->
-      <div v-if="cart.items.length" class="mt-5 flex flex-col space-y-3">
+      <div v-if="cart && numberOfItems" class="mt-5 flex flex-col space-y-3">
         <div class="flex justify-between">
           <p class="font-medium">Subtotal (Tax included)</p>
           <span>NT${{ subTotal.toLocaleString() }}</span>
@@ -53,160 +56,23 @@
 
 <script setup lang="ts">
 import type { Cart, CartItem } from '~~/types/product'
-const cart: Cart = reactive({
-  id: 10001,
-  created: '2023-01-01T00:00',
-  items: [
-    {
-      addedTime: '2023-01-01T06:00',
-      selectedColor: 'White',
-      selectedSize: 'XS',
-      quantity: 1,
-      name: 'Spring Limited Edition T-Shirt ',
-      price: 2000,
-      id: 'product10001',
-      breadcrumbs: [
-        { id: 1, name: 'Home', href: '/' },
-        { id: 2, name: 'Tops', href: '/products/product-tops' },
-      ],
-      images: [
-        {
-          src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg',
-          alt: 'Two each of gray, white, and black shirts laying flat.',
-        },
-        {
-          src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg',
-          alt: 'Model wearing plain black basic tee.',
-        },
-        {
-          src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg',
-          alt: 'Model wearing plain gray basic tee.',
-        },
-        {
-          src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg',
-          alt: 'Model wearing plain white basic tee.',
-        },
-      ],
-      colors: [
-        {
-          name: 'White',
-          inStock: true,
-          class: 'bg-white',
-          selectedClass: 'ring-gray-400',
-        },
-        {
-          name: 'Gray',
-          inStock: true,
-          class: 'bg-gray-200',
-          selectedClass: 'ring-gray-400',
-        },
-        {
-          name: 'Black',
-          inStock: true,
-          class: 'bg-gray-900',
-          selectedClass: 'ring-gray-900',
-        },
-      ],
-      sizes: [
-        { name: 'XXS', inStock: false },
-        { name: 'XS', inStock: true },
-        { name: 'S', inStock: true },
-        { name: 'M', inStock: true },
-        { name: 'L', inStock: true },
-        { name: 'XL', inStock: true },
-        { name: '2XL', inStock: false },
-        { name: '3XL', inStock: true },
-      ],
-      description:
-        'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
-      highlights: [
-        'Hand cut and sewn locally',
-        'Dyed with our proprietary colors',
-        'Pre-washed & pre-shrunk',
-        'Ultra-soft 100% cotton',
-      ],
-      details:
-        'The 6-Pack includes two black, two white, and two heather gray Basic Tees. ',
-    },
-    {
-      addedTime: '2023-01-01T06:30',
-      selectedColor: 'Black',
-      selectedSize: 'L',
-      quantity: 2,
-      name: 'Spring Limited Edition T-Shirt ',
-      price: 2000,
-      id: 'product10001',
-      breadcrumbs: [
-        { id: 1, name: 'Home', href: '/' },
-        { id: 2, name: 'Tops', href: '/products/product-tops' },
-      ],
-      images: [
-        {
-          src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg',
-          alt: 'Two each of gray, white, and black shirts laying flat.',
-        },
-        {
-          src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg',
-          alt: 'Model wearing plain black basic tee.',
-        },
-        {
-          src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg',
-          alt: 'Model wearing plain gray basic tee.',
-        },
-        {
-          src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg',
-          alt: 'Model wearing plain white basic tee.',
-        },
-      ],
-      colors: [
-        {
-          name: 'White',
-          inStock: true,
-          class: 'bg-white',
-          selectedClass: 'ring-gray-400',
-        },
-        {
-          name: 'Gray',
-          inStock: true,
-          class: 'bg-gray-200',
-          selectedClass: 'ring-gray-400',
-        },
-        {
-          name: 'Black',
-          inStock: true,
-          class: 'bg-gray-900',
-          selectedClass: 'ring-gray-900',
-        },
-      ],
-      sizes: [
-        { name: 'XXS', inStock: false },
-        { name: 'XS', inStock: true },
-        { name: 'S', inStock: true },
-        { name: 'M', inStock: true },
-        { name: 'L', inStock: true },
-        { name: 'XL', inStock: true },
-        { name: '2XL', inStock: false },
-        { name: '3XL', inStock: true },
-      ],
-      description:
-        'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
-      highlights: [
-        'Hand cut and sewn locally',
-        'Dyed with our proprietary colors',
-        'Pre-washed & pre-shrunk',
-        'Ultra-soft 100% cotton',
-      ],
-      details:
-        'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
-    },
-  ],
+const cart = ref<Cart | null>(null)
+
+onMounted(() => {
+  const cartFromLS = localStorage.getItem('cart')
+  if (cartFromLS && cartFromLS !== 'undefined')
+    cart.value = JSON.parse(cartFromLS)
 })
 
-const numberOfItems = computed(() => cart.items.length)
+const numberOfItems = computed(() =>
+  cart.value
+    ? cart.value.items.reduce((totalItems, i) => totalItems + i.quantity, 0)
+    : null
+)
 
 const subTotal = computed(() =>
-  numberOfItems.value > 0
-    ? cart.items.reduce(
+  cart.value
+    ? cart.value.items.reduce(
         (subTotal, item) => subTotal + item.price * item.quantity,
         0
       )
@@ -218,17 +84,23 @@ const shipping = computed(() => (subTotal.value < 3000 ? 150 : 0))
 const total = computed(() => subTotal.value + shipping.value)
 
 function handleDeleteItem(deleteTarget: CartItem) {
-  const targetIndex = cart.items.findIndex(
-    (i) => i.addedTime === deleteTarget.addedTime
-  )
-  if (targetIndex !== -1) {
-    cart.items.splice(targetIndex, 1)
-    console.log('>>> Deleted item: ', deleteTarget)
-    console.log('>>> New cart: ', cart.items)
-  } else console.log('>>> Target not found')
+  const items = cart.value?.items
+  if (items) {
+    const targetIndex = items.findIndex(
+      (i) => i.addedTime === deleteTarget.addedTime
+    )
+    if (targetIndex !== -1) {
+      items.splice(targetIndex, 1)
+      console.log('>>> Item deleted. New cart: ', cart.value)
+    } else console.log('>>> Target not found')
+  } else console.log('>>> Cart not found')
 }
 
 function onCheckoutClick() {
   console.log('>>> Cart: ', cart)
 }
+
+watchEffect(() => {
+  if (cart.value) localStorage.setItem('cart', JSON.stringify(cart.value))
+})
 </script>

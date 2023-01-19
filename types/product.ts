@@ -2,6 +2,7 @@ export interface Product {
   name: string
   price: number
   id: string
+  href: string
   breadcrumbs: Breadcrumb[]
   images: Image[]
   colors: Color[]
@@ -46,7 +47,11 @@ export interface ProductOverview {
   description: string
 }
 
-export interface CartItem extends Product {
+export interface CartItem {
+  name: string
+  id: string
+  price: number
+  image: Image
   addedTime: string
   selectedColor: string
   selectedSize: string
@@ -54,7 +59,7 @@ export interface CartItem extends Product {
 }
 
 export interface Cart {
-  id: number
+  id: string
   created: string
   items: CartItem[]
 }

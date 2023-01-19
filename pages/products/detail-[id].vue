@@ -110,7 +110,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import type { Color, Size } from '~~/types/product'
+import type { Color, Size, Cart, CartItem } from '~~/types/product'
 const { data: product } = useLazyFetch('/api/product', {
   method: 'GET',
 })
@@ -121,15 +121,55 @@ function findFirstInstock(targetOptions: Color[] | Size[] | undefined) {
   return i
 }
 
-const inStockColorIndex = findFirstInstock(product.value?.colors)
-const inStockSizeIndex = findFirstInstock(product.value?.sizes)
-
-const selectedColor = ref(product.value?.colors[inStockColorIndex].name || '')
-const selectedSize = ref(product.value?.sizes[inStockSizeIndex].name || '')
+const selectedColor = ref('')
+const selectedSize = ref('')
 
 const quantity = ref(1)
 
+watchEffect(() => {
+  if (product.value) {
+    const inStockColorIndex = findFirstInstock(product.value.colors)
+    selectedColor.value = product.value.colors[inStockColorIndex].name
+
+    const inStockSizeIndex = findFirstInstock(product.value.sizes)
+    selectedSize.value = product.value.sizes[inStockSizeIndex].name
+  }
+})
+
+const cartFromLS = localStorage.getItem('cart')
+
 function onSubmitClick() {
-  console.log('>>> Item add to cart.')
+  const currentTime = new Date().toISOString()
+  if (product.value) {
+    const newItem: CartItem = {
+      name: product.value.name,
+      id: product.value.id,
+      price: product.value.price,
+      image: product.value.images[0],
+      addedTime: currentTime,
+      selectedColor: selectedColor.value,
+      selectedSize: selectedSize.value,
+      quantity: quantity.value,
+    }
+
+    if (cartFromLS && cartFromLS !== 'undefined') {
+      // Get existing cart and push item
+      const cart: Cart = JSON.parse(cartFromLS)
+      cart.items.push(newItem)
+      localStorage.setItem('cart', JSON.stringify(cart))
+    } else {
+      // Create a new cart
+      const id = `cart#${Math.floor(Math.random() * 1000000)}`
+      const newCart: Cart = {
+        id: id,
+        created: currentTime,
+        items: [newItem],
+      }
+      localStorage.setItem('cart', JSON.stringify(newCart))
+    }
+    console.log('>>> Item add to cart.')
+  } else {
+    console.log('>>> Product is null')
+  }
 }
 </script>

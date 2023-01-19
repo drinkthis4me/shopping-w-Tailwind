@@ -3,8 +3,8 @@
     <div class="mr-5 shrink-0 self-center bg-white">
       <NuxtLink :to="`products/detail-${cartItem.id}`">
         <img
-          :src="cartItem.images[0].src"
-          :alt="cartItem.images[0].alt"
+          :src="cartItem.image.src"
+          :alt="cartItem.image.alt"
           class="h-20 w-20 object-cover object-center hover:opacity-75 sm:h-24 sm:w-24" />
       </NuxtLink>
     </div>
@@ -14,9 +14,6 @@
           {{ cartItem.name }}
         </h3>
       </NuxtLink>
-      <p class="hidden text-sm text-slate-500 sm:inline-block">
-        {{ cartItem.details }}
-      </p>
       <div class="mt-1">Size: {{ cartItem.selectedSize }}</div>
       <div class="mt-1">Color: {{ cartItem.selectedColor }}</div>
       <div class="mt-1 flex justify-start">
@@ -25,7 +22,7 @@
         </label>
         <input
           @input="
-            $emit('update:quantity', ($event.target as HTMLInputElement).value)
+          handleQuantityInput
           "
           :value="cartItem.quantity"
           type="number"
@@ -60,5 +57,10 @@ defineProps<{
   cartItem: CartItem
 }>()
 
-defineEmits(['update:quantity', 'toBeDeleted'])
+const emit = defineEmits(['update:quantity', 'toBeDeleted'])
+
+function handleQuantityInput(e:Event){
+  const targetValue = (e.target as HTMLInputElement).value
+  emit('update:quantity', Number(targetValue))
+}
 </script>
