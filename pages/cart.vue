@@ -6,11 +6,9 @@
       <!-- Items -->
       <div v-if="cart.items.length" class="mt-5 border-y-2">
         <ul class="divide-y">
-          <li v-for="item in cart.items" :key="item.addedTime" class="py-5">{{ item.quantity }}
+          <li v-for="item in cart.items" :key="item.addedTime" class="py-5">
             <CartItem
               :cart-item="item"
-              v-model:color="item.selectedColor"
-              v-model:size="item.selectedSize"
               v-model:quantity="item.quantity"
               @to-be-deleted="handleDeleteItem(item)" />
           </li>

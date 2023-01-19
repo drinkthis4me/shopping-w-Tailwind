@@ -17,68 +17,27 @@
       <p class="hidden text-sm text-slate-500 sm:inline-block">
         {{ cartItem.details }}
       </p>
-      <div class="flex flex-wrap sm:space-x-1">
-        <div class="flex">
-          <label for="size" class="label">
-            <span class="label-text">Size</span>
-          </label>
-          <select
-            @change="
-              $emit('update:size', ($event.target as HTMLSelectElement).value)
-            "
-            :value="cartItem.selectedSize"
-            id="size"
-            class="bg-white pl-1 text-sm">
-            <option
-              v-for="o in cartItem.sizes"
-              :key="o.name"
-              :value="o.name"
-              :disabled="!o.inStock">
-              {{ o.name }}
-            </option>
-          </select>
-        </div>
-        <div class="flex">
-          <label for="color" class="label">
-            <span class="label-text">Color</span>
-          </label>
-          <select
-            @change="
-              $emit('update:color', ($event.target as HTMLSelectElement).value)
-            "
-            :value="cartItem.selectedColor"
-            id="color"
-            class="bg-white pl-1 text-sm">
-            <option
-              v-for="o in cartItem.colors"
-              :key="o.name"
-              :value="o.name"
-              :disabled="!o.inStock">
-              {{ o.name }}
-            </option>
-          </select>
-        </div>
-        <div class="flex">
-          <label :for="`quantity-${cartItem.addedTime}`" class="label">
-            <span class="label-text">Quantity</span>
-          </label>
-          <input
-            @input=" $emit(
-                'update:quantity',
-                ($event.target as HTMLInputElement).value
-              )"
-            :value="cartItem.quantity"
-            type="number"
-            required
-            min="1"
-            max="50"
-            :id="`quantity-${cartItem.addedTime}`"
-            class="w-10 appearance-none bg-white pl-1 text-sm" />
-        </div>
+      <div class="mt-1">Size: {{ cartItem.selectedSize }}</div>
+      <div class="mt-1">Color: {{ cartItem.selectedColor }}</div>
+      <div class="mt-1 flex justify-start">
+        <label :for="`quantity-${cartItem.addedTime}`">
+          <span>Quantity:</span>
+        </label>
+        <input
+          @input="
+            $emit('update:quantity', ($event.target as HTMLInputElement).value)
+          "
+          :value="cartItem.quantity"
+          type="number"
+          required
+          min="1"
+          max="50"
+          :id="`quantity-${cartItem.addedTime}`"
+          class="ml-3 w-10 appearance-none bg-white text-sm" />
       </div>
     </div>
     <div class="flex flex-col items-center justify-between">
-      <div class="block text-lg font-medium">NT${{ cartItem.price }}</div>
+      <div class="block text-lg">NT${{ cartItem.price }}</div>
       <button @click="$emit('toBeDeleted', cartItem)">
         <svg
           class="hover:text-secondary"
@@ -101,5 +60,5 @@ defineProps<{
   cartItem: CartItem
 }>()
 
-defineEmits(['update:color', 'update:size', 'update:quantity', 'toBeDeleted'])
+defineEmits(['update:quantity', 'toBeDeleted'])
 </script>
