@@ -41,6 +41,42 @@
 
           <form @submit.prevent="onSubmitClick" class="mt-5 space-y-1">
             <div class="mx-auto max-w-md">
+              <fieldset class="mt-4">
+                <legend class="sr-only">Choose a color</legend>
+                <div class="flex items-center space-x-3">
+                  <!--
+                  Active and Checked: "ring ring-offset-1"
+                  Not Active and Checked: "ring-2"
+                -->
+                  <!-- Problem: tree shaking.
+                      Solution: https://stackoverflow.com/questions/72356953/how-to-use-dynamic-class-of-tailwindcss-like-this-in-project-of-vue3-and-vite
+                -->
+                  <div v-for="c in product.colors" :key="c.name">
+                    <input
+                      v-model="selectedColor"
+                      type="radio"
+                      :id="`color-${c.name}`"
+                      :value="c.name"
+                      class="peer sr-only"
+                      :aria-labelledby="`color-choice-${c.name}-label`" />
+                    <label
+                      :for="`color-${c.name}`"
+                      :class="[
+                        'relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none peer-checked:ring peer-checked:ring-offset-1',
+                        c.selectedClass,
+                      ]">
+                      <span class="sr-only">{{ c.name }}</span>
+                      <span
+                        aria-hidden="true"
+                        :class="[
+                          'h-8 w-8 rounded-full border border-black border-opacity-10',
+                          c.class,
+                        ]"></span>
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+
               <FormSelectOptions
                 :label-name="'Color'"
                 :list-options="product.colors"
@@ -111,8 +147,77 @@
 </template>
 <script setup lang="ts">
 import type { Color, Size, Cart, CartItem } from '~~/types/product'
-const { data: product } = useLazyFetch('/api/product', {
-  method: 'GET',
+// const { data: product } = useLazyFetch('/api/product', {
+//   method: 'GET',
+// })
+
+const product = ref({
+  name: 'Spring Limited Edition T-Shirt',
+  price: 2000,
+  id: 'item1001',
+  href: '#',
+  breadcrumbs: [
+    { id: 1, name: 'Home', href: '/' },
+    { id: 2, name: 'Tops', href: '/products/product-tops' },
+  ],
+  images: [
+    {
+      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg',
+      alt: 'Two each of gray, white, and black shirts laying flat.',
+    },
+    {
+      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg',
+      alt: 'Model wearing plain black basic tee.',
+    },
+    {
+      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg',
+      alt: 'Model wearing plain gray basic tee.',
+    },
+    {
+      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg',
+      alt: 'Model wearing plain white basic tee.',
+    },
+  ],
+  colors: [
+    {
+      name: 'White',
+      inStock: true,
+      class: 'bg-white',
+      selectedClass: 'ring-gray-400',
+    },
+    {
+      name: 'Gray',
+      inStock: true,
+      class: 'bg-gray-400',
+      selectedClass: 'ring-gray-400',
+    },
+    {
+      name: 'Black',
+      inStock: true,
+      class: 'bg-gray-900',
+      selectedClass: 'ring-gray-900',
+    },
+  ],
+  sizes: [
+    { name: 'XXS', inStock: false },
+    { name: 'XS', inStock: true },
+    { name: 'S', inStock: true },
+    { name: 'M', inStock: true },
+    { name: 'L', inStock: true },
+    { name: 'XL', inStock: true },
+    { name: '2XL', inStock: false },
+    { name: '3XL', inStock: true },
+  ],
+  description:
+    'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
+  highlights: [
+    'Hand cut and sewn locally',
+    'Dyed with our proprietary colors',
+    'Pre-washed & pre-shrunk',
+    'Ultra-soft 100% cotton',
+  ],
+  details:
+    'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
 })
 
 function findFirstInstock(targetOptions: Color[] | Size[] | undefined) {
