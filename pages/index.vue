@@ -13,7 +13,7 @@
               :key="n"
               :id="`slide${n}`"
               class="carousel-item relative w-full">
-              <img src="https://placeimg.com/800/400/arch" alt="Random placeholder image" class="w-full" />
+              <img src="https://via.placeholder.com/800x400.png/?text=Awesome+new+product" alt="placeholder image" class="w-full" />
               <div
                 class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
                 <a
