@@ -6,49 +6,51 @@
       <div v-if="numberOfItems" class="mt-1 text-center text-sm text-slate-600">
         {{ numberOfItems }} Item{{ numberOfItems > 1 ? 's' : '' }}
       </div>
-      <!-- Items -->
-      <div v-if="cart && numberOfItems" class="mt-5 border-y-2">
-        <ul class="divide-y">
-          <li v-for="item in cart.items" :key="item.addedTime" class="py-5">
-            <CartItem
-              :cart-item="item"
-              v-model:quantity="item.quantity"
-              @to-be-deleted="handleDeleteItem(item)" />
-          </li>
-        </ul>
-      </div>
-      <!-- Info -->
-      <div v-if="cart && numberOfItems" class="mt-5 flex flex-col space-y-3">
-        <div class="flex justify-between">
-          <p class="font-medium">Subtotal (Tax included)</p>
-          <span>NT${{ subTotal.toLocaleString() }}</span>
+      <div class="grid gap-5 md:grid-cols-3">
+        <!-- Items -->
+        <div v-if="cart && numberOfItems" class="mt-5 border-y-2 md:col-span-2">
+          <ul class="divide-y">
+            <li v-for="item in cart.items" :key="item.addedTime" class="py-5">
+              <CartItem
+                :cart-item="item"
+                v-model:quantity="item.quantity"
+                @to-be-deleted="handleDeleteItem(item)" />
+            </li>
+          </ul>
         </div>
-        <div class="flex justify-between">
-          <p class="font-medium">Estimated shipping and fee</p>
-          <span>{{ shipping.toLocaleString() }}</span>
+        <!-- Info -->
+        <div v-if="cart && numberOfItems" class="mt-5 flex flex-col space-y-3">
+          <div class="flex justify-between">
+            <p class="font-medium">Subtotal (Tax included)</p>
+            <span>NT${{ subTotal.toLocaleString() }}</span>
+          </div>
+          <div class="flex justify-between">
+            <p class="font-medium">Estimated shipping and fee</p>
+            <span>{{ shipping.toLocaleString() }}</span>
+          </div>
+          <div class="flex justify-between border-y-2 py-4">
+            <p class="font-medium">Total</p>
+            <span>NT${{ total.toLocaleString() }}</span>
+          </div>
+          <div class="form-control">
+            <button class="btn btn-primary rounded" @click="onCheckoutClick">
+              Check Out
+            </button>
+            <NuxtLink
+              to="/"
+              class="link link-hover hover:text-primary mt-2 text-center">
+              Continue shopping
+            </NuxtLink>
+          </div>
         </div>
-        <div class="flex justify-between border-y py-4">
-          <p class="font-medium">Total</p>
-          <span>NT${{ total.toLocaleString() }}</span>
-        </div>
-        <div class="form-control">
-          <button class="btn btn-primary rounded" @click="onCheckoutClick">
-            Check Out
+        <div v-else class="col-span-3 flex flex-col items-center mt-5 space-y-5">
+          <div class="text-lg">Your cart is currently empty.</div>
+          <button
+            class="btn btn-primary rounded capitalize"
+            @click="navigateTo('/')">
+            Continue Shopping
           </button>
-          <NuxtLink
-            to="/"
-            class="link link-hover hover:text-primary mt-2 text-center">
-            Continue shopping
-          </NuxtLink>
         </div>
-      </div>
-      <div v-else class="form-control mt-5 space-y-5">
-        <div class="text-center text-lg">Your cart is currently empty.</div>
-        <button
-          class="btn btn-primary rounded capitalize"
-          @click="navigateTo('/')">
-          Continue Shopping
-        </button>
       </div>
     </div>
   </div>
