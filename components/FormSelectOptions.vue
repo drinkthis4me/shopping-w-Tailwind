@@ -2,6 +2,9 @@
   <div class="flex w-full flex-col">
     <label :for="labelName" class="label">
       <span class="label-text">{{ labelName }}</span>
+      <NuxtLink to="/pages/faqs">
+        <span class="label-text-alt">Size Chart</span>
+      </NuxtLink>
     </label>
     <select
       :value="modelValue"

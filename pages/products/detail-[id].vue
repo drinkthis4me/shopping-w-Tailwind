@@ -41,45 +41,8 @@
 
           <form @submit.prevent="onSubmitClick" class="mt-5 space-y-1">
             <div class="mx-auto max-w-md">
-              <fieldset class="mt-4">
-                <legend class="sr-only">Choose a color</legend>
-                <div class="flex items-center space-x-3">
-                  <!--
-                  Active and Checked: "ring ring-offset-1"
-                  Not Active and Checked: "ring-2"
-                -->
-                  <!-- Problem: tree shaking.
-                      Solution: https://stackoverflow.com/questions/72356953/how-to-use-dynamic-class-of-tailwindcss-like-this-in-project-of-vue3-and-vite
-                -->
-                  <div v-for="c in product.colors" :key="c.name">
-                    <input
-                      v-model="selectedColor"
-                      type="radio"
-                      :id="`color-${c.name}`"
-                      :value="c.name"
-                      class="peer sr-only"
-                      :aria-labelledby="`color-choice-${c.name}-label`" />
-                    <label
-                      :for="`color-${c.name}`"
-                      :class="[
-                        'relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none peer-checked:ring peer-checked:ring-offset-1',
-                        c.selectedClass,
-                      ]">
-                      <span class="sr-only">{{ c.name }}</span>
-                      <span
-                        aria-hidden="true"
-                        :class="[
-                          'h-8 w-8 rounded-full border border-black border-opacity-10',
-                          c.class,
-                        ]"></span>
-                    </label>
-                  </div>
-                </div>
-              </fieldset>
-
-              <FormSelectOptions
-                :label-name="'Color'"
-                :list-options="product.colors"
+              <FormColorRadio
+                :colors="product.colors"
                 v-model:model-value="selectedColor" />
             </div>
             <div class="mx-auto max-w-md">
