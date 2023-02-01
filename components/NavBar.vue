@@ -35,7 +35,7 @@
               </svg>
             </button>
 
-            <NuxtLink to="/cart">
+            <NuxtLink to="/cart" v-if="!cartStore.numberOfItems">
               <button
                 class="hover:bg-primary rounded border-2 border-transparent p-1 text-3xl text-gray-400 hover:text-slate-700 focus:text-white focus:outline-none"
                 aria-label="Shopping cart">
@@ -45,6 +45,22 @@
                     d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2s-.9-2-2-2zM1 2v2h2l3.6 7.59l-1.35 2.45c-.16.28-.25.61-.25.96c0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12l.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1.003 1.003 0 0 0 20 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2s2-.9 2-2s-.9-2-2-2z" />
                 </svg>
               </button>
+            </NuxtLink>
+            <NuxtLink to="/cart" v-else>
+              <div class="indicator">
+                <div class="indicator-item badge badge-secondary">
+                  {{ cartStore.numberOfItems }}
+                </div>
+                <button
+                  class="hover:bg-primary rounded border-2 border-transparent p-1 text-3xl text-gray-400 hover:text-slate-700 focus:text-white focus:outline-none"
+                  aria-label="Shopping cart">
+                  <svg width="32" height="32" viewBox="0 0 24 24">
+                    <path
+                      fill="currentColor"
+                      d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2s-.9-2-2-2zM1 2v2h2l3.6 7.59l-1.35 2.45c-.16.28-.25.61-.25.96c0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12l.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1.003 1.003 0 0 0 20 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2s2-.9 2-2s-.9-2-2-2z" />
+                  </svg>
+                </button>
+              </div>
             </NuxtLink>
             <!-- Profile dropdown if isLogin-->
             <div v-if="authStore.currentUser" class="relative ml-3">
@@ -63,7 +79,7 @@
                 </button>
               </div>
               <transition
-                enter-active-class="transition ease-out duration-100"
+                enter-active-class="transition ease-out duration-200"
                 enter-class="transform opacity-0 scale-95"
                 enter-to-class="transform opacity-100 scale-100"
                 leave-active-class="transition ease-in duration-200"
@@ -207,7 +223,9 @@
 
 <script setup lang="ts">
 import { useAuthStore } from '~~/stores/useAuthStore'
+import { useCartStore } from '~~/stores/useCartStore'
 const authStore = useAuthStore()
+const cartStore = useCartStore()
 const products = [
   {
     title: 'Tops',

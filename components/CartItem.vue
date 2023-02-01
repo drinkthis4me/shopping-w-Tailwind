@@ -21,9 +21,7 @@
           <span>Quantity:</span>
         </label>
         <input
-          @input="
-          handleQuantityInput
-          "
+          @input="handleQuantityInput"
           :value="cartItem.quantity"
           type="number"
           required
@@ -59,7 +57,7 @@ defineProps<{
 
 const emit = defineEmits(['update:quantity', 'toBeDeleted'])
 
-function handleQuantityInput(e:Event){
+function handleQuantityInput(e: Event) {
   const targetValue = (e.target as HTMLInputElement).value
   emit('update:quantity', Number(targetValue))
 }
