@@ -107,25 +107,26 @@
       </div>
     </div>
   </div>
-
-  <div v-show="showToast" class="toast toast-top toast-end inset-y-12">
+  <!-- toast -->
+  <div v-show="showToast" class="toast z-[9999]">
     <div
-      class="w-[370px] rounded bg-white p-5 ring-2 ring-black ring-opacity-10 ">
+      class="w-[370px] rounded bg-white p-5 ring-2 ring-black ring-opacity-10">
       <div class="flex flex-col space-y-4">
         <div class="flex items-center justify-between">
           <div class="flex">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6 flex-shrink-0 stroke-green-500"
-            fill="none"
-            viewBox="0 0 24 24">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <span class="ml-1">Item added to cart</span></div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 flex-shrink-0 stroke-green-500"
+              fill="none"
+              viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="ml-1">Item added to cart</span>
+          </div>
           <button class="btn btn-ghost" @click="showToast = false">X</button>
         </div>
         <div class="flex">
@@ -133,21 +134,18 @@
             :src="store.cart.items.at(-1)?.image.src"
             :alt="store.cart.items.at(-1)?.image.alt"
             class="w-20" />
-          <div class="flex flex-col ml-5 space-y-1">
+          <div class="ml-5 flex flex-col space-y-1">
             <p>{{ store.cart.items.at(-1)?.name }}</p>
             <p>${{ store.cart.items.at(-1)?.price.toLocaleString() }}</p>
           </div>
         </div>
         <div class="flex justify-center space-x-2">
           <NuxtLink
-            class="btn btn-primary w-40  btn-outline  rounded-lg"
-            to="/cart"
-            >
+            class="btn btn-primary btn-outline w-40 rounded-lg"
+            to="/cart">
             View Cart
           </NuxtLink>
-          <button class="btn btn-primary w-40 rounded-lg">
-            Checkout
-          </button>
+          <button class="btn btn-primary w-40 rounded-lg">Checkout</button>
         </div>
       </div>
     </div>
@@ -265,8 +263,8 @@ function onAddClick() {
 
 const showToast = ref(false)
 
-function toggleToast(){
+function toggleToast() {
   showToast.value = true
-  setTimeout(()=> showToast.value = false, 5000)
+  setTimeout(() => (showToast.value = false), 5000)
 }
 </script>
