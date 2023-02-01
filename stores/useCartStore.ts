@@ -12,18 +12,14 @@ export const useCartStore = defineStore('Cart', () => {
   })
 
   const numberOfItems = computed(() =>
-    cart.value.items
-      ? cart.value.items.reduce((totalItems, i) => totalItems + i.quantity, 0)
-      : null
+    cart.value.items.reduce((totalItems, i) => totalItems + i.quantity, 0)
   )
 
   const subtotal = computed(() =>
-    cart.value.items
-      ? cart.value.items.reduce(
-          (subtotal, item) => subtotal + item.price * item.quantity,
-          0
-        )
-      : 0
+    cart.value.items.reduce(
+      (subtotal, item) => subtotal + item.price * item.quantity,
+      0
+    )
   )
 
   const shipping = computed(() => (subtotal.value < 3000 ? 150 : 0))
