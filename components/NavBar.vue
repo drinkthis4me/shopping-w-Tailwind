@@ -27,8 +27,9 @@
           <div class="ml-4 flex items-center md:ml-6">
             <!-- search icon -->
             <button
-              class="hover:bg-primary rounded border-2 border-transparent p-1 text-3xl text-gray-400 hover:text-slate-700 focus:text-white focus:outline-none"
-              aria-label="Search">
+              class="hover:bg-primary rounded-full border-2 border-transparent p-1 text-3xl text-gray-400 hover:text-slate-700 focus:text-white focus:outline-none"
+              aria-label="Search"
+              @click="searchIsOpen = !searchIsOpen">
               <svg width="32" height="32" viewBox="0 0 24 24">
                 <path
                   fill="currentColor"
@@ -45,7 +46,7 @@
                     {{ cartStore.numberOfItems }}
                   </div>
                   <button
-                    class="hover:bg-primary rounded border-2 border-transparent p-1 text-3xl text-gray-400 hover:text-slate-700 focus:text-white focus:outline-none"
+                    class="hover:bg-primary rounded-full border-2 border-transparent p-1 text-3xl text-gray-400 hover:text-slate-700 focus:text-white focus:outline-none"
                     aria-label="Shopping cart">
                     <svg width="32" height="32" viewBox="0 0 24 24">
                       <path
@@ -72,7 +73,7 @@
             </NuxtLink>
             <NuxtLink to="/cart" v-else>
               <button
-                class="hover:bg-primary rounded border-2 border-transparent p-1 text-3xl text-gray-400 hover:text-slate-700 focus:text-white focus:outline-none"
+                class="hover:bg-primary rounded-full border-2 border-transparent p-1 text-3xl text-gray-400 hover:text-slate-700 focus:text-white focus:outline-none"
                 aria-label="Shopping cart">
                 <svg width="32" height="32" viewBox="0 0 24 24">
                   <path
@@ -83,11 +84,11 @@
             </NuxtLink>
 
             <!-- Profile dropdown if isLogin-->
-            <div v-if="authStore.currentUser" class="relative ml-3">
+            <div v-if="authStore.currentUser" class="relative ml-4">
               <div>
                 <button
                   @click="toggle"
-                  class="focus:shadow-solid hover:bg-primary flex max-w-xs items-center rounded p-1 text-3xl text-gray-400 hover:text-slate-700 focus:text-white focus:outline-none"
+                  class="focus:shadow-solid hover:bg-primary flex max-w-xs items-center rounded-full p-1 text-3xl text-gray-400 hover:text-slate-700 focus:text-white focus:outline-none"
                   id="user-menu"
                   aria-label="User menu"
                   aria-haspopup="true">
@@ -128,7 +129,7 @@
             <div v-else class="relative ml-3">
               <NuxtLink to="/users/login">
                 <button
-                  class="focus:shadow-solid hover:bg-primary flex max-w-xs items-center rounded p-1 text-3xl text-gray-400 hover:text-slate-700 focus:text-white focus:outline-none"
+                  class="focus:shadow-solid hover:bg-primary flex max-w-xs items-center rounded-full p-1 text-3xl text-gray-400 hover:text-slate-700 focus:text-white focus:outline-none"
                   id="user-menu"
                   aria-label="User menu"
                   aria-haspopup="true">
@@ -145,8 +146,9 @@
         <div class="-mr-2 flex md:hidden">
           <!-- search icon -->
           <button
-            class="hover:bg-primary rounded border-2 border-transparent p-1 text-3xl text-gray-400 hover:text-slate-700 focus:text-white focus:outline-none"
-            aria-label="Search">
+            class="hover:bg-primary rounded-full border-2 border-transparent p-1 text-3xl text-gray-400 hover:text-slate-700 focus:text-white focus:outline-none"
+            aria-label="Search"
+            @click="searchIsOpen = !searchIsOpen">
             <svg width="32" height="32" viewBox="0 0 24 24">
               <path
                 fill="currentColor"
@@ -163,7 +165,7 @@
                   {{ cartStore.numberOfItems }}
                 </div>
                 <button
-                  class="hover:bg-primary rounded border-2 border-transparent p-1 text-3xl text-gray-400 hover:text-slate-700 focus:text-white focus:outline-none"
+                  class="hover:bg-primary rounded-full border-2 border-transparent p-1 text-3xl text-gray-400 hover:text-slate-700 focus:text-white focus:outline-none"
                   aria-label="Shopping cart">
                   <svg width="32" height="32" viewBox="0 0 24 24">
                     <path
@@ -188,7 +190,7 @@
           </NuxtLink>
           <NuxtLink to="/cart" v-else>
             <button
-              class="hover:bg-primary rounded border-2 border-transparent p-1 text-3xl text-gray-400 hover:text-slate-700 focus:text-white focus:outline-none"
+              class="hover:bg-primary rounded-full border-2 border-transparent p-1 text-3xl text-gray-400 hover:text-slate-700 focus:text-white focus:outline-none"
               aria-label="Shopping cart">
               <svg width="32" height="32" viewBox="0 0 24 24">
                 <path
@@ -197,33 +199,29 @@
               </svg>
             </button>
           </NuxtLink>
-          <!-- burger icon -->
-          <button
-            @click="toggle"
-            class="hover:bg-primary inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:text-slate-700 focus:bg-gray-700 focus:text-white focus:outline-none">
+          <!-- burger icon/ close icon -->
+          <label
+            class="btn btn-circle btn-ghost swap swap-rotate hover:bg-primary text-gray-400 hover:text-slate-700 focus:bg-gray-700 focus:text-white focus:outline-none">
+            <input @change="toggle" type="checkbox" class="sr-only" />
             <svg
-              :class="[isOpen ? 'hidden' : 'block', 'h-6 w-6']"
-              stroke="currentColor"
-              fill="none"
-              viewBox="0 0 24 24">
+              class="swap-off fill-current"
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              viewBox="0 0 512 512">
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"></path>
+                d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" />
             </svg>
             <svg
-              :class="[isOpen ? 'block' : 'hidden', 'h-6 w-6']"
-              stroke="currentColor"
-              fill="none"
-              viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"></path>
+              class="swap-on fill-current"
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              viewBox="0 0 512 512">
+              <polygon
+                points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" />
             </svg>
-          </button>
+          </label>
         </div>
       </div>
     </div>
@@ -272,6 +270,33 @@
       </div>
     </div>
   </nav>
+  <transition
+    enter-active-class="transition ease-out duration-500"
+    enter-from-class="transform opacity-0 scale-95"
+    enter-to-class="transform opacity-100 scale-100"
+    leave-active-class="transition ease-in duration-100"
+    leave-from-class="transform opacity-100 scale-100"
+    leave-to-class="transform opacity-0 scale-95">
+    <div v-show="searchIsOpen">
+      <div class="flex justify-evenly p-2">
+        <input
+          type="text"
+          placeholder="Search me"
+          class="input input-bordered input-primary w-full max-w-lg" />
+        <button class="btn btn-circle btn-ghost" @click="searchIsOpen = false">
+          <svg
+            class="fill-current"
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 512 512">
+            <polygon
+              points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </transition>
 </template>
 
 <script setup lang="ts">
@@ -326,4 +351,6 @@ const isOpen = ref(false)
 function toggle() {
   isOpen.value = !isOpen.value
 }
+
+const searchIsOpen = ref(false)
 </script>
