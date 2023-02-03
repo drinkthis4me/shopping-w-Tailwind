@@ -258,6 +258,7 @@ import { useCartStore } from '~~/stores/useCartStore'
 
 definePageMeta({
   layout: false,
+  middleware: ['cart-w-items-only']
 })
 
 const cartStore = useCartStore()
