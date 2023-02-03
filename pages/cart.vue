@@ -42,9 +42,9 @@
             <span>NT${{ store.total.toLocaleString() }}</span>
           </div>
           <div class="form-control">
-            <button class="btn btn-primary rounded" @click="onCheckoutClick">
+            <NuxtLink class="btn btn-primary rounded" to="/checkout/shipping">
               Check Out
-            </button>
+            </NuxtLink>
             <NuxtLink
               to="/"
               class="link link-hover hover:text-primary mt-2 text-center">
@@ -70,9 +70,5 @@
 <script setup lang="ts">
 import { useCartStore } from '~~/stores/useCartStore'
 const store = useCartStore()
-
-function onCheckoutClick() {
-  console.log('>>> Cart: ', store.cart)
-}
 
 </script>

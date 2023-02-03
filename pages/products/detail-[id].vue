@@ -141,11 +141,15 @@
         </div>
         <div class="flex justify-center space-x-2">
           <NuxtLink
-            class="btn btn-primary btn-outline w-40 rounded-lg"
-            to="/cart">
+            to="/cart"
+            class="btn btn-primary btn-outline w-40 rounded-lg">
             View Cart
           </NuxtLink>
-          <button class="btn btn-primary w-40 rounded-lg">Checkout</button>
+          <NuxtLink
+            to="/checkout/shipping"
+            class="btn btn-primary w-40 rounded-lg">
+            Checkout
+          </NuxtLink>
         </div>
       </div>
     </div>
