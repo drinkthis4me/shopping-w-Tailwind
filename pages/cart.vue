@@ -47,7 +47,7 @@
             </NuxtLink>
             <NuxtLink
               to="/"
-              class="btn btn-ghost rounded-md mt-2 text-center focus:outline-accent">
+              class="btn btn-ghost focus:outline-accent mt-2 rounded-md text-center">
               Continue shopping
             </NuxtLink>
           </div>
@@ -71,4 +71,9 @@
 import { useCartStore } from '~~/stores/useCartStore'
 const store = useCartStore()
 
+watch(
+  () => store.cart.items,
+  () => store.updateLocalStorage(),
+  {deep: true}
+)
 </script>

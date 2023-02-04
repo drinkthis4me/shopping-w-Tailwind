@@ -1,14 +1,26 @@
 import { defineStore } from 'pinia'
-import { useStorage } from '@vueuse/core'
+
 import type { CartItem, Product } from '~~/types/product'
 
 export const useCartStore = defineStore('Cart', () => {
   const id = `cart#${Math.floor(Math.random() * 1000000)}`
 
-  const cart = useStorage('cart', {
+  // const cart = useStorage('cart', {
+  //   id: id,
+  //   created: new Date().toISOString(),
+  //   items: [] as CartItem[],
+  // })
+
+  const cart = ref({
     id: id,
     created: new Date().toISOString(),
     items: [] as CartItem[],
+  })
+
+  onMounted(() => {
+    const cartInLocalStorage = localStorage.getItem('cart')
+    if (cartInLocalStorage && cartInLocalStorage !== 'undefined')
+      cart.value = JSON.parse(cartInLocalStorage)
   })
 
   const numberOfItems = computed(() =>
@@ -25,6 +37,11 @@ export const useCartStore = defineStore('Cart', () => {
   const shipping = computed(() => (subtotal.value < 3000 ? 150 : 0))
 
   const total = computed(() => subtotal.value + shipping.value)
+
+  function updateLocalStorage() {
+    const newCart = JSON.stringify(cart.value)
+    localStorage.setItem('cart', newCart)
+  }
 
   function addToCart(
     product: Product,
@@ -44,13 +61,17 @@ export const useCartStore = defineStore('Cart', () => {
     }
 
     cart.value.items.push(newItem)
+
+    updateLocalStorage()
   }
 
   function deleteFromCart(target: CartItem) {
     const items = cart.value.items
     const targetIndex = items.findIndex((i) => i.addedTime === target.addedTime)
-    if (targetIndex !== 1) items.splice(targetIndex, 1)
-    else console.log('>>> Target not found')
+    if (targetIndex !== 1) {
+      items.splice(targetIndex, 1)
+      updateLocalStorage()
+    } else console.log('>>> Target not found')
   }
 
   return {
@@ -60,6 +81,7 @@ export const useCartStore = defineStore('Cart', () => {
     shipping,
     total,
 
+    updateLocalStorage,
     addToCart,
     deleteFromCart,
   }
