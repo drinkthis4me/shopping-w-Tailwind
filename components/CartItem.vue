@@ -1,22 +1,22 @@
 <template>
   <div class="flex">
     <div class="mr-5 shrink-0 self-center bg-white">
-      <NuxtLink :to="`products/detail-${cartItem.id}`">
+      <NuxtLink :to="`products/detail-${cartItem.id}`" class="focus:outline-accent">
         <img
           :src="cartItem.image.src"
           :alt="cartItem.image.alt"
-          class="h-20 w-20 object-cover object-center hover:opacity-75 sm:h-24 sm:w-24" />
+          class="h-20 w-20 object-cover object-center hover:opacity-75 sm:h-24 sm:w-24 " />
       </NuxtLink>
     </div>
-    <div class="flex flex-grow flex-col">
-      <NuxtLink :to="`products/detail-${cartItem.id}`">
+    <div class="flex flex-grow flex-col space-y-1">
+      <NuxtLink :to="`products/detail-${cartItem.id}`" class="focus:outline-accent">
         <h3 class="hover:text-primary text-lg font-medium">
           {{ cartItem.name }}
         </h3>
       </NuxtLink>
-      <div class="mt-1">Size: {{ cartItem.selectedSize }}</div>
-      <div class="mt-1">Color: {{ cartItem.selectedColor }}</div>
-      <div class="mt-1 flex justify-start">
+      <div class="">Size: {{ cartItem.selectedSize }}</div>
+      <div class="">Color: {{ cartItem.selectedColor }}</div>
+      <div class=" flex justify-start">
         <label :for="`quantity-${cartItem.addedTime}`">
           <span>Quantity:</span>
         </label>
@@ -28,12 +28,12 @@
           min="1"
           max="50"
           :id="`quantity-${cartItem.addedTime}`"
-          class="ml-3 w-10 appearance-none bg-white text-sm" />
+          class="form-input ml-3 w-12 border border-info text-center bg-white text-sm p-0 focus:ring-accent focus:ring" />
       </div>
     </div>
     <div class="flex flex-col items-center justify-between">
       <div class="block text-lg">NT${{ cartItem.price }}</div>
-      <button @click="$emit('toBeDeleted', cartItem)">
+      <button @click="$emit('toBeDeleted', cartItem)" class="focus:outline-accent">
         <svg
           class="hover:text-secondary"
           xmlns="http://www.w3.org/2000/svg"

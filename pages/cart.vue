@@ -47,7 +47,7 @@
             </NuxtLink>
             <NuxtLink
               to="/"
-              class="link link-hover hover:text-primary mt-2 text-center">
+              class="btn btn-ghost rounded-md mt-2 text-center focus:outline-accent">
               Continue shopping
             </NuxtLink>
           </div>

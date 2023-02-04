@@ -5,7 +5,7 @@
         <h1 class="p-5 text-4xl">Fancy Company Title</h1>
       </template>
       <template #summary>
-        <div class="collapse w-full border-y bg-slate-300">
+        <label class="collapse w-full border-y bg-slate-300">
           <input type="checkbox" v-model="summaryIsOpen" />
           <div class="collapse-title grid grid-cols-4 text-xl">
             <div class="col-span-3 flex">
@@ -19,7 +19,7 @@
                   d="M7 22q-.825 0-1.412-.587Q5 20.825 5 20q0-.825.588-1.413Q6.175 18 7 18t1.412.587Q9 19.175 9 20q0 .825-.588 1.413Q7.825 22 7 22Zm10 0q-.825 0-1.412-.587Q15 20.825 15 20q0-.825.588-1.413Q16.175 18 17 18t1.413.587Q19 19.175 19 20q0 .825-.587 1.413Q17.825 22 17 22ZM6.15 6l2.4 5h7l2.75-5ZM5.2 4h14.75q.575 0 .875.512q.3.513.025 1.038l-3.55 6.4q-.275.5-.738.775Q16.1 13 15.55 13H8.1L7 15h12v2H7q-1.125 0-1.7-.988q-.575-.987-.05-1.962L6.6 11.6L3 4H1V2h3.25Zm3.35 7h7Z" />
               </svg>
               <span class="ml-1">
-                {{ summaryIsOpen ? 'Hide' : 'Show' }} order Summary
+                {{ summaryIsOpen ? 'Hide' : 'Show' }} order summary
               </span>
             </div>
             <span class="justify-self-end font-medium">
@@ -87,7 +87,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </label>
       </template>
       <template #aside>
         <div class="w-full bg-slate-100 p-12">
@@ -169,7 +169,9 @@
                 <h2 class="whitespace-nowrap text-xl">Contact information</h2>
                 <span class="text-sm">
                   Already have an account?
-                  <NuxtLink to="/users/login" class="font-medium">
+                  <NuxtLink
+                    to="/users/login"
+                    class="focus:ring-accent hover:text-secondary font-medium focus:outline-none focus:ring">
                     Log in
                   </NuxtLink>
                 </span>
@@ -180,7 +182,7 @@
                   id="email"
                   placeholder=""
                   required
-                  class="peer h-11 w-full rounded-md border border-gray-300 p-2 pl-2 placeholder-transparent focus:border-2 focus:border-black focus:outline-none" />
+                  class="focus:ring-accent peer h-11 w-full rounded-md border border-gray-300 p-2 pl-2 placeholder-transparent focus:border-none focus:outline-none focus:ring" />
                 <label
                   for="email"
                   class="absolute left-0.5 -top-0.5 pl-2 text-sm text-gray-400 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-0.5 peer-focus:text-sm peer-focus:text-gray-400">
@@ -210,7 +212,7 @@
                 <select
                   id="country"
                   placeholder=""
-                  class="peer h-11 w-full cursor-pointer appearance-none rounded-md border border-gray-300 bg-white p-2">
+                  class="focus:ring-accent peer h-11 w-full cursor-pointer rounded-md border border-gray-300 bg-white p-2 focus:border-none focus:outline-none focus:ring">
                   <option
                     v-for="country in countries"
                     :key="country"
@@ -233,11 +235,11 @@
                 <button type="submit" class="btn btn-primary w-full rounded-md">
                   Continue to shipping
                 </button>
-                <button
-                  type="button"
-                  class="btn btn-ghost mt-3 w-full rounded-md">
+                <NuxtLink
+                  to="/cart"
+                  class="btn btn-ghost focus:ring-accent mt-3 w-full rounded-md focus:ring focus:ring-offset-4">
                   Return to cart
-                </button>
+                </NuxtLink>
               </div>
             </div>
           </form>
@@ -258,12 +260,12 @@ import { useCartStore } from '~~/stores/useCartStore'
 
 definePageMeta({
   layout: false,
-  middleware: ['cart-w-items-only']
+  middleware: ['cart-w-items-only'],
 })
 
 const cartStore = useCartStore()
 
-const summaryIsOpen = ref(false)
+const summaryIsOpen = ref(true)
 
 const isSendingSpam = ref(true)
 
