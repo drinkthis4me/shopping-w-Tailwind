@@ -176,23 +176,17 @@
                   </NuxtLink>
                 </span>
               </div>
-              <div class="relative">
-                <input
-                  type="email"
-                  id="email"
-                  placeholder=""
-                  required
-                  class="focus:ring-accent peer h-11 w-full rounded-md border border-gray-300 p-2 pl-2 placeholder-transparent focus:border-none focus:outline-none focus:ring" />
-                <label
-                  for="email"
-                  class="absolute left-0.5 -top-0.5 pl-2 text-sm text-gray-400 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-0.5 peer-focus:text-sm peer-focus:text-gray-400">
-                  Email
-                </label>
-              </div>
+              <FormInput
+                title="Email"
+                id="email"
+                type="email"
+                inputmode="text"
+                :required="true"
+                v-model.modelValue="email" />
               <div class="flex">
                 <label class="label cursor-pointer">
                   <input
-                    v-model="isSendingSpam"
+                    v-model="sendThemSpam"
                     type="checkbox"
                     class="checkbox checkbox-primary" />
                   <span class="label-text ml-3">
@@ -205,20 +199,17 @@
               <div class="flex items-baseline">
                 <h2 class="text-xl">Shipping address</h2>
               </div>
-              <div class="">
+              <div>
                 <label for="country" class="ml-1 text-gray-400">
                   Country/Region
                 </label>
                 <select
+                  v-model="country"
                   id="country"
                   placeholder=""
                   class="focus:ring-accent peer h-11 w-full cursor-pointer rounded-md border border-gray-300 bg-white p-2 focus:border-none focus:outline-none focus:ring">
-                  <option
-                    v-for="country in countries"
-                    :key="country"
-                    :value="country"
-                    :selected="country === 'Taiwan'">
-                    {{ country }}
+                  <option v-for="c in countries" :key="c" :value="c">
+                    {{ c }}
                   </option>
                 </select>
               </div>
@@ -247,9 +238,19 @@
       </template>
       <template #footer>
         <div class="flex space-x-3 border-t py-5 px-3">
-          <div class="text-sm">Refund policy</div>
-          <div class="text-sm">Privacy policy</div>
-          <div class="text-sm">Terms of service</div>
+          <NuxtLink to="/pages/about" class="hover:text-secondary text-sm">
+            Refund policy
+          </NuxtLink>
+          <NuxtLink
+            to="/pages/privacy-policy"
+            class="hover:text-secondary text-sm">
+            Privacy policy
+          </NuxtLink>
+          <NuxtLink
+            to="/pages/terms-of-service"
+            class="hover:text-secondary text-sm">
+            Terms of service
+          </NuxtLink>
         </div>
       </template>
     </NuxtLayout>
@@ -267,7 +268,9 @@ const cartStore = useCartStore()
 
 const summaryIsOpen = ref(true)
 
-const isSendingSpam = ref(true)
+const email = ref('')
+
+const sendThemSpam = ref(true)
 
 const formInputs = ref([
   {
@@ -328,7 +331,9 @@ const formInputs = ref([
   },
 ])
 
-const countries = [
+const country = ref('Taiwan')
+
+const countries = ref([
   'Albania',
   'Algeria',
   'Argentina',
@@ -429,12 +434,25 @@ const countries = [
   'United States',
   'Uzbekistan',
   'Vietnam',
-]
+])
 
 function onSubmitClick() {
-  console.log(
-    '>>> submit shipping detail',
-    formInputs.value.map((i) => i.input)
+  const result1 = [
+    {
+      title: 'Email',
+      input: email.value,
+    },
+    {
+      title: 'Send Spam?',
+      input: sendThemSpam.value,
+    },
+  ]
+
+  const result2 = formInputs.value.map(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    ({ id, type, inputmode, required, ...rest }) => rest
   )
+
+  console.log('>>> Submitted shipping detail: ', [...result1, ...result2])
 }
 </script>

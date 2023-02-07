@@ -1,7 +1,7 @@
 import type { Config } from 'tailwindcss'
 
 export default <Partial<Config>>{
-  plugins: [require('@tailwindcss/forms'), require('daisyui')],
+  plugins: [require('@tailwindcss/forms')({strategy: 'class'}), require('daisyui')],
   daisyui: {
     themes: ['pastel','dark'],
   },
