@@ -17,11 +17,6 @@ export const useCartStore = defineStore('Cart', () => {
     items: [] as CartItem[],
   })
 
-  onMounted(() => {
-    const cartInLocalStorage = localStorage.getItem('cart')
-    if (cartInLocalStorage && cartInLocalStorage !== 'undefined')
-      cart.value = JSON.parse(cartInLocalStorage)
-  })
 
   const numberOfItems = computed(() =>
     cart.value.items.reduce((totalItems, i) => totalItems + i.quantity, 0)
@@ -37,6 +32,16 @@ export const useCartStore = defineStore('Cart', () => {
   const shipping = computed(() => (subtotal.value < 3000 ? 150 : 0))
 
   const total = computed(() => subtotal.value + shipping.value)
+
+  function getCart(){
+    if (
+      localStorage.getItem('cart') &&
+      localStorage.getItem('cart') !== 'undefined'
+    ){
+      cart.value = JSON.parse(localStorage.getItem('cart') as string)
+      console.log('>>> Cart found in localStorage. Cart copied from localStorage.')
+    }
+  }
 
   function updateLocalStorage() {
     const newCart = JSON.stringify(cart.value)
@@ -68,7 +73,7 @@ export const useCartStore = defineStore('Cart', () => {
   function deleteFromCart(target: CartItem) {
     const items = cart.value.items
     const targetIndex = items.findIndex((i) => i.addedTime === target.addedTime)
-    if (targetIndex !== 1) {
+    if (targetIndex !== -1) {
       items.splice(targetIndex, 1)
       updateLocalStorage()
     } else console.log('>>> Target not found')
@@ -81,6 +86,7 @@ export const useCartStore = defineStore('Cart', () => {
     shipping,
     total,
 
+    getCart,
     updateLocalStorage,
     addToCart,
     deleteFromCart,
