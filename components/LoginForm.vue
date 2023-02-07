@@ -35,27 +35,26 @@
                 type="email"
                 placeholder="foobar@example.com"
                 required
-                class="focus:border-primary peer h-10 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none"
-                :class="[isValid ? 'text-gray-900' : 'text-error']" />
+                class="focus:border-primary peer h-10 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none" />
               <label
                 for="login-email"
                 class="absolute left-0 -top-3.5 text-sm text-gray-600 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-gray-600">
                 Email Address
               </label>
-              <div class="relative mt-7">
-                <input
-                  v-model="loginInput.data.password"
-                  id="login-password"
-                  type="password"
-                  class="focus:border-primary peer h-10 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none"
-                  placeholder="Password"
-                  required />
-                <label
-                  for="login-password"
-                  class="peero-focus:-top3.5 absolute left-0 -top-3.5 text-sm text-gray-600 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-gray-600">
-                  Password
-                </label>
-              </div>
+            </div>
+            <div class="relative mt-7">
+              <input
+                v-model="loginInput.data.password"
+                id="login-password"
+                type="password"
+                class="focus:border-primary peer h-10 w-full border-b-2 border-gray-300 text-gray-900 placeholder-transparent focus:outline-none"
+                placeholder="Password"
+                required />
+              <label
+                for="login-password"
+                class="peero-focus:-top3.5 absolute left-0 -top-3.5 text-sm text-gray-600 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-sm peer-focus:text-gray-600">
+                Password
+              </label>
             </div>
             <div class="form-control mt-4">
               <label class="label cursor-pointer">
@@ -157,7 +156,6 @@ const emit = defineEmits(['login-success', 'signup-success'])
 const bannerMsg = ref('')
 const bannerStatus = ref('error')
 const isLogin = ref(true)
-const isValid = ref<boolean>(true)
 const loginInput = reactive({
   data: { email: '', password: '', rememberMe: false },
 
