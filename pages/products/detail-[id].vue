@@ -267,8 +267,12 @@ function onAddClick() {
 
 const showToast = ref(false)
 
+const timeoutID = ref<undefined | NodeJS.Timeout>(undefined)
+
 function toggleToast() {
+  clearTimeout(timeoutID.value)
+  showToast.value = false
   showToast.value = true
-  setTimeout(() => (showToast.value = false), 5000)
+  timeoutID.value = setTimeout(() => (showToast.value = false), 5000)
 }
 </script>
