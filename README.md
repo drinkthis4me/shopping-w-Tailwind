@@ -1,6 +1,21 @@
-# Nuxt 3 Minimal Starter
+# Shopping with Tailwind
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+My first time building an e-commerce website.
+
+## List for frameworks, libraries and packages:
+
+- [Nuxt 3](https://nuxt.com)for JS Framework
+- [Tailwind CSS](https://tailwindcss.com/) for CSS framework
+- [daisyUI](https://daisyui.com/) for Component library (as a Tailwind CSS plugin)
+- [Pinia](https://pinia.vuejs.org/) for state management
+- [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) for authentication
+- [bcryptjs](https://github.com/dcodeIO/bcrypt.js) for hashing passwords
+- [vueuse](https://vueuse.org/) for utilities
+
+Linting/ formatting tools:
+
+- [ESLint](https://eslint.org/)
+- [Prettier](https://prettier.io/)
 
 ## Setup, Develop, Production
 
@@ -10,8 +25,8 @@ npm install
 npm run dev
 
 npm run build
-npm run preview
 
+npm run preview
 ```
 
 # Tailwind
@@ -85,3 +100,18 @@ Prettier will find tailwind.config.ts at the same dir as .prettierrc. If your co
 
 ## Component library
 [daisyui](https://daisyui.com/) can be installed as a Tailwind CSS plugin
+
+1. Install daisyUI
+
+```bash
+npm i daisyui
+```
+
+2. Add daisyUI to your <code>tailwind.config.ts</code>
+
+```js
+module.exports = {
+  //...
+  plugins: [require("daisyui")],
+}
+```
