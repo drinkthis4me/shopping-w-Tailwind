@@ -260,9 +260,10 @@
         class="border-t border-gray-700 pt-4 pb-3">
         <div class="px-2">
           <NuxtLink
+            @click="toggle"
             v-for="u in userCenter"
             :key="u.title"
-            href="#"
+            :to="u.link"
             class="hover:bg-primary mt-1 block rounded-md px-3 py-2 text-base font-medium text-white hover:text-slate-600 focus:bg-gray-700 focus:text-white focus:outline-none">
             {{ u.title }}
           </NuxtLink>

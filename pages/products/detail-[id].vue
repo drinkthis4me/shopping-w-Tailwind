@@ -146,7 +146,7 @@
             View Cart
           </NuxtLink>
           <NuxtLink
-            to="/checkout/shipping"
+            to="/checkout/information"
             class="btn btn-primary w-40 rounded-lg">
             Checkout
           </NuxtLink>

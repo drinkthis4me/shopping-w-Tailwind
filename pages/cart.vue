@@ -42,7 +42,7 @@
             <span>NT${{ store.total.toLocaleString() }}</span>
           </div>
           <div class="form-control">
-            <NuxtLink class="btn btn-primary rounded" to="/checkout/shipping">
+            <NuxtLink class="btn btn-primary rounded" to="/checkout/information">
               Check Out
             </NuxtLink>
             <NuxtLink

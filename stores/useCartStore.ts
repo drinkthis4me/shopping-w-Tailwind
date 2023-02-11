@@ -17,7 +17,6 @@ export const useCartStore = defineStore('Cart', () => {
     items: [] as CartItem[],
   })
 
-
   const numberOfItems = computed(() =>
     cart.value.items.reduce((totalItems, i) => totalItems + i.quantity, 0)
   )
@@ -31,15 +30,16 @@ export const useCartStore = defineStore('Cart', () => {
 
   const shipping = computed(() => (subtotal.value < 3000 ? 150 : 0))
 
-  const total = computed(() => subtotal.value + shipping.value)
+  const salesTax = computed(() => Math.ceil(subtotal.value * 0.05))
 
-  function getCart(){
+  const total = computed(() => subtotal.value + shipping.value + salesTax.value)
+
+  function getCart() {
     if (
       localStorage.getItem('cart') &&
       localStorage.getItem('cart') !== 'undefined'
-    ){
+    ) {
       cart.value = JSON.parse(localStorage.getItem('cart') as string)
-      console.log('>>> Cart found in localStorage. Cart copied from localStorage.')
     }
   }
 
@@ -84,6 +84,7 @@ export const useCartStore = defineStore('Cart', () => {
     numberOfItems,
     subtotal,
     shipping,
+    salesTax,
     total,
 
     getCart,
