@@ -2,6 +2,8 @@
 
 My first time building an e-commerce website.
 
+![Screenshot of Homepage](docs/Screenshot%202023-02-25%20at%2011-36-08%20Screenshot.png)
+
 ## List for frameworks, libraries and packages:
 
 - [Nuxt 3](https://nuxt.com)for JS Framework
